@@ -108,7 +108,7 @@ stop_time = 100;
 
 folderPath = 'E:\master-2\CVPR\CVPR\PR_CW_DATA_2021';
 files = dir(fullfile(folderPath, '*.mat')); % 获取所有.mat文件
-name_list = {'F0Electrodes','F1Electrodes'};
+name_list = {'F0Electrodes','F1Electrodes','F0pdc', 'F1pdc', 'F0pac', 'F1pac', 'F0tac', 'F1tac', 'F0tdc', 'F1tdc'};
 
 for i_name = 1:length(name_list)
 savedVariables = {}; % 用于存储所有生成的变量名
@@ -137,17 +137,45 @@ end
 
 % load the data after sampling
 
-data1=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\combined_F0Electrodes.mat');
-data2=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\combined_F1Electrodes.mat');
+datapac=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\combined_F0pac.mat');
+datapac2=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\combined_F1pac.mat');
 
 % question 1: load the generated files and show the data from the same graph
 % in order to show the differences between different objects
 
-figure(6)
+% pressure, vibration, temperature
+% pdc, pac, tdc
+figure(6);
 
-% plot the F0Electrodes values of different objects. 
-% in each object, we take the average of electrodes
-plot(data1.acrylic_211_01_HOLD_F0Electrodes)
+% object_list = {'acrylic_211_01_HOLD_','black_foam_110_01_HOLD_','car_sponge_101_01_HOLD_',
+%    'flour_sack_410_01_HOLD_','kitchen_sponge_114_01_HOLD_','steel_vase_702_01_HOLD_'};
+
+pac_acrylic = datapac.acrylic_211_01_HOLD_F0pac(2,:);
+pdc_acrylic = datapac.acrylic_211_01_HOLD_F0pdc;
+tdc_acrylic = datapac.acrylic_211_01_HOLD_F0tdc;
+plot3(pac_acrylic, pdc_acrylic, tdc_acrylic, "r");
 hold on;
-plot(data2.acrylic_211_01_HOLD_F1Electrodes)
+
+pac_black_foam = datapac.black_foam_110_01_HOLD_F0pac(2,:);
+pdc_black_foam = datapac.black_foam_110_01_HOLD_F0pdc;
+tdc_black_foam = datapac.black_foam_110_01_HOLD_F0tdc;
+plot3(pac_black_foam, pdc_black_foam, tdc_black_foam, "g");
+hold on;
+
+pac_car_sponge = datapac.car_sponge_101_01_HOLD_F0pac(2,:);
+pdc_car_sponge = datapac.car_sponge_101_01_HOLD_F0pdc;
+tdc_car_sponge = datapac.car_sponge_101_01_HOLD_F0tdc;
+plot3(pac_car_sponge, pdc_car_sponge, tdc_car_sponge, "b");
+hold on;
+
+pac_flour_sack = datapac.flour_sack_410_01_HOLD_F0pac(2,:);
+pdc_flour_sack = datapac.flour_sack_410_01_HOLD_F0pdc;
+tdc_flour_sack = datapac.flour_sack_410_01_HOLD_F0tdc;
+plot3(pac_flour_sack, pdc_flour_sack, tdc_flour_sack, "c");
+hold on;
+
+pac_kitchen_sponge = datapac.kitchen_sponge_114_01_HOLD_F0pac(2,:);
+pdc_kitchen_sponge = datapac.kitchen_sponge_114_01_HOLD_F0pdc;
+tdc_kitchen_sponge = datapac.kitchen_sponge_114_01_HOLD_F0tdc;
+plot3(pac_kitchen_sponge, pdc_kitchen_sponge, tdc_kitchen_sponge, "m");
 hold on;
