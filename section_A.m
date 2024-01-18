@@ -103,35 +103,129 @@ plot(data6_1.F0tdc)
 
 %% question2
 
-start_time = 1;
-stop_time = 100;
+% start_time = 1;
+% stop_time = 100;
+time = 200; % 待修改的时间捕获
 
-folderPath = 'E:\master-2\CVPR\CVPR\PR_CW_DATA_2021';
-files = dir(fullfile(folderPath, '*.mat')); % 获取所有.mat文件
-name_list = {'F0Electrodes','F1Electrodes','F0pdc', 'F1pdc', 'F0pac', 'F1pac', 'F0tac', 'F1tac', 'F0tdc', 'F1tdc'};
+folderPath = pwd;
+files = dir(fullfile(folderPath, '*.mat'));
+name_F0 = {'F0pac', 'F0pdc', 'F0tac', 'F0tdc'};% 1: High Vibration 2: Low Pressure, 3:Temperature change 4:temperature
+name_F1 = {'F1pac',  'F1pdc',  'F1tac', 'F1tdc'};
+name_Electro_F0 = {'F0Electrodes'}; % Electrodes
+name_Electro_F1 = {'F1Electrodes'}; % Electrodes
 
-for i_name = 1:length(name_list)
-savedVariables = {}; % 用于存储所有生成的变量名
+% 初始化数据矩阵
+dataMatrix_F0 = [];
+dataMatrix_F1 = [];
+dataMatrix_elec_F0 = [];
+dataMatrix_elec_F1 = [];
+
+for i_name = 1:length(name_F0)
+    tempData = []; % 临时存储当前变量的所有文件数据
+
     for i = 1:length(files)
-        % 提取文件名（不包含扩展名）
-        [~, baseFileName, ~] = fileparts(files(i).name);
-        % 生成变量名
-        variableName = sprintf('%s_%s', baseFileName, name_list{i_name});
-        % 加载数据
-        data = load(fullfile(folderPath, files(i).name)); 
-        % 检查是否存在特定变量
-        if isfield(data, name_list{i_name})
-            % 读取并存储数据
-            eval([variableName ' = data.' name_list{i_name} '(:, start_time:stop_time);']);
-            savedVariables{end + 1} = variableName;
+        data = load(fullfile(folderPath, files(i).name));
+
+        if isfield(data, name_F0{i_name})
+            if strcmp(name_F0{i_name}, 'F0pac') % 检查是否是特殊处理的变量
+                % 特殊处理 F0pac
+                if size(data.(name_F0{i_name}), 1) >= 2 && size(data.(name_F0{i_name}), 2) >= time
+                    tempData(end + 1) = data.(name_F0{i_name})(2, time);
+                else
+                    tempData(end + 1) = NaN;
+                end
+            else
+                % 正常处理其他变量
+                if length(data.(name_F0{i_name})) >= time
+                    tempData(end + 1) = data.(name_F0{i_name})(time);
+                else
+                    tempData(end + 1) = NaN;
+                end
+            end
         end
     end
 
-    if ~isempty(savedVariables)
-        saveFilename = fullfile(folderPath, ['combined_' name_list{i_name} '.mat']);
-        save(saveFilename, savedVariables{:});
-    end
+    % 将当前变量的数据添加到数据矩阵中
+    dataMatrix_F0 = [dataMatrix_F0; tempData];
 end
+
+for i_name = 1:length(name_F1)
+    tempData = []; % 临时存储当前变量的所有文件数据
+
+    for i = 1:length(files)
+        data = load(fullfile(folderPath, files(i).name));
+
+        if isfield(data, name_F1{i_name})
+            if strcmp(name_F1{i_name}, 'F1pac') % 检查是否是特殊处理的变量
+                % 特殊处理 F0pac
+                if size(data.(name_F1{i_name}), 1) >= 2 && size(data.(name_F1{i_name}), 2) >= time
+                    tempData(end + 1) = data.(name_F1{i_name})(2, time);
+                else
+                    tempData(end + 1) = NaN;
+                end
+            else
+                % 正常处理其他变量
+                if length(data.(name_F1{i_name})) >= time
+                    tempData(end + 1) = data.(name_F1{i_name})(time);
+                else
+                    tempData(end + 1) = NaN;
+                end
+            end
+        end
+    end
+
+    % 将当前变量的数据添加到数据矩阵中
+    dataMatrix_F1 = [dataMatrix_F1; tempData];
+end
+
+for i_name = 1:length(name_Electro_F0)
+    tempData = []; % 临时存储当前变量的所有文件数据
+
+    for i = 1:length(files)
+        data = load(fullfile(folderPath, files(i).name));
+
+        if isfield(data, name_Electro_F0{i_name})
+            selectedData = data.(name_Electro_F0{i_name})(:, time); % 提取每一行在指定时间的数据
+            tempData = [tempData; selectedData']; % 转换为行向量并添加到临时数据中
+        end
+    end
+
+    % 将当前变量的数据添加到数据矩阵中
+    dataMatrix_elec_F0 = [dataMatrix_elec_F0; tempData]; % 此处可能需要调整
+end
+
+for i_name = 1:length(name_Electro_F1)
+    tempData = []; % 临时存储当前变量的所有文件数据
+
+    for i = 1:length(files)
+        data = load(fullfile(folderPath, files(i).name));
+
+        if isfield(data, name_Electro_F1{i_name})
+            selectedData = data.(name_Electro_F1{i_name})(:, time); % 提取每一行在指定时间的数据
+            tempData = [tempData; selectedData']; % 转换为行向量并添加到临时数据中
+        end
+    end
+
+    % 将当前变量的数据添加到数据矩阵中
+    dataMatrix_elec_F1 = [dataMatrix_elec_F1; tempData]; % 此处可能需要调整
+end
+
+% 转置数据矩阵以匹配所需的60x4格式
+dataMatrix_F0 = dataMatrix_F0';
+dataMatrix_F1 = dataMatrix_F1';
+
+% 保存数据
+saveFilename = fullfile(folderPath, 'combined_F0.mat');
+save(saveFilename, 'dataMatrix_F0');
+
+saveFilename = fullfile(folderPath, 'combined_F1.mat');
+save(saveFilename, 'dataMatrix_F1');
+
+saveFilename = fullfile(folderPath, 'combined_Electro_F0.mat');
+save(saveFilename, 'dataMatrix_elec_F0');
+
+saveFilename = fullfile(folderPath, 'combined_Electro_F1.mat');
+save(saveFilename, 'dataMatrix_elec_F1');
 
 %% question3
 
