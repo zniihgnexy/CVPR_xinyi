@@ -105,12 +105,12 @@ plot(data6_1.F0tdc)
 
 % start_time = 1;
 % stop_time = 100;
-time = 200; % 待修改的时间捕获
+time = 25; % 待修改的时间捕获
 
-folderPath = pwd;
+folderPath = './PR_CW_DATA_2021';
 files = dir(fullfile(folderPath, '*.mat'));
-name_F0 = {'F0pac', 'F0pdc', 'F0tac', 'F0tdc'};% 1: High Vibration 2: Low Pressure, 3:Temperature change 4:temperature
-name_F1 = {'F1pac',  'F1pdc',  'F1tac', 'F1tdc'};
+name_F0 = {'F0pac', 'F0pdc', 'F0tdc'};% 1: High Vibration 2: Low Pressure, 3:Temperature change 4:temperature
+name_F1 = {'F1pac',  'F1pdc',  'F1tdc'};
 name_Electro_F0 = {'F0Electrodes'}; % Electrodes
 name_Electro_F1 = {'F1Electrodes'}; % Electrodes
 
@@ -215,26 +215,26 @@ dataMatrix_F0 = dataMatrix_F0';
 dataMatrix_F1 = dataMatrix_F1';
 
 % 保存数据
-saveFilename = fullfile(folderPath, 'combined_F0.mat');
+saveFilename = fullfile(folderPath, 'F0_PVT.mat');
 save(saveFilename, 'dataMatrix_F0');
 
-saveFilename = fullfile(folderPath, 'combined_F1.mat');
+saveFilename = fullfile(folderPath, 'F1_PVT.mat');
 save(saveFilename, 'dataMatrix_F1');
 
-saveFilename = fullfile(folderPath, 'combined_Electro_F0.mat');
+saveFilename = fullfile(folderPath, 'F0_Electro.mat');
 save(saveFilename, 'dataMatrix_elec_F0');
 
-saveFilename = fullfile(folderPath, 'combined_Electro_F1.mat');
+saveFilename = fullfile(folderPath, 'F1_Electro.mat');
 save(saveFilename, 'dataMatrix_elec_F1');
 
 %% question3
 
 % load the data after sampling
 
-dataF0=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\F0_PVT.mat');
-dataF1=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\F1_PVT.mat');
-dataEl1=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\F0_Electrodes.mat');
-dataEl2=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\F1_Electrodes.mat');
+dataF0=load('E:\master-2\CVPR\CVPR\F0_PVT.mat');
+dataF1=load('E:\master-2\CVPR\CVPR\F1_PVT.mat');
+%dataEl1=load('E:\master-2\CVPR\CVPR\F0_Electro.mat');
+%dataEl2=load('E:\master-2\CVPR\CVPR\F1_Electro.mat');
 
 % question 1: load the generated files and show the data from the same graph
 % in order to show the differences between different objects
@@ -242,31 +242,50 @@ dataEl2=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\F1_Electrodes.mat');
 % pressure, vibration, temperature
 % pdc, pac, tdc
 
-% object_list = {'acrylic_211_01_HOLD_','black_foam_110_01_HOLD_','car_sponge_101_01_HOLD_',
-%    'flour_sack_410_01_HOLD_','kitchen_sponge_114_01_HOLD_','steel_vase_702_01_HOLD_'};
-
-colRanges = [1:10; 11:20; 21:30; 31:40; 41:50; 51:60];
-
 figure(6);
 
-% Loop through the different column groups
-for groupIdx = 1:size(colRanges, 1)
-    groupData = dataF0(:, colRanges(groupIdx, :));
-    scatter3(groupData(1, :), groupData(2, :), groupData(3, :), 50, 'filled', 'DisplayName', sprintf('Cols %d-%d', colRanges(groupIdx, 1), colRanges(groupIdx, end)));
-    
-    hold on;
-end
+x = dataMatrix_F0(:, 1);
+y = dataMatrix_F0(:, 2);
+z = dataMatrix_F0(:, 3);
+
+scatter3(x(1:10), y(1:10), z(1:10), 30, 'r', 'filled');
+hold on;
+scatter3(x(11:20), y(11:20), z(11:20), 30, 'g', 'filled');
+hold on;
+scatter3(x(21:30), y(21:30), z(21:30), 30, 'b', 'filled');
+hold on;
+scatter3(x(31:40), y(31:40), z(31:40), 30, 'k', 'filled');
+hold on;
+scatter3(x(41:50), y(41:50), z(41:50), 30, 'c', 'filled');
+hold on;
+scatter3(x(51:end), y(51:end), z(51:end), 30, 'y', 'filled');
 
 xlabel('X-axis');
 ylabel('Y-axis');
 zlabel('Z-axis');
-
-% legend('Location', 'Best');
-
-% Title and grid
-title('3D Scatter Plot with Different Colors for Column Groups');
 grid on;
 
-hold off;
-
 % saveas(gcf, '3D_Scatter_Plot.png');
+
+figure(7);
+
+x2 = dataMatrix_F1(:, 1);
+y2 = dataMatrix_F1(:, 2);
+z2 = dataMatrix_F1(:, 3);
+
+scatter3(x2(1:10), y2(1:10), z2(1:10), 30, 'r', 'filled');
+hold on;
+scatter3(x2(11:20), y2(11:20), z2(11:20), 30, 'g', 'filled');
+hold on;
+scatter3(x2(21:30), y2(21:30), z2(21:30), 30, 'b', 'filled');
+hold on;
+scatter3(x2(31:40), y2(31:40), z2(31:40), 30, 'k', 'filled');
+hold on;
+scatter3(x2(41:50), y2(41:50), z2(41:50), 30, 'c', 'filled');
+hold on;
+scatter3(x2(51:end), y2(51:end), z2(51:end), 30, 'y', 'filled');
+
+xlabel('X-axis');
+ylabel('Y-axis');
+zlabel('Z-axis');
+grid on;
