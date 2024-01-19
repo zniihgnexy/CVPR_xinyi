@@ -1,8 +1,8 @@
 %%section B - 1
 % a: covariance matrix, eigenvalues, and eigenvectors
-covMatrix = cov(dataMatrix_F0);
+covMatrix_F0 = cov(dataMatrix_F0);
 % eigenvectors V, eigenvalues D
-[eigenvectors, eigenvalues] = eig(covMatrix);
+[eigenvectors, eigenvalues] = eig(covMatrix_F0);
 
 disp('Eigenvectors:');
 disp(eigenvectors);
@@ -74,3 +74,67 @@ ylabel('Value');
 % e:Comment on your findings.
 
 %% section B - 2
+load(".\F0_Electro.mat");
+load(".\F1_Electro.mat")
+
+%%%%% Section B - 2 - a
+% Assuming dataMatrix_elec_F0 and dataMatrix_elec_F1 are already loaded and standardized
+% Standardised data with the Principal components displayed
+
+standardizedData_F0 = (dataMatrix_elec_F0 - mean(dataMatrix_elec_F0)) ./ std(dataMatrix_elec_F0);
+meanData_F0 = mean(standardizedData_F0);
+
+standardizedData_F1 = (dataMatrix_elec_F1 - mean(dataMatrix_elec_F1)) ./ std(dataMatrix_elec_F1);
+meanData_F1 = mean(standardizedData_F1);
+
+% Calculate covariance matrices
+covMatrix_F0 = cov(standardizedData_F0);
+covMatrix_F1 = cov(standardizedData_F1);
+
+% Perform eigenvalue decomposition
+[eigenvectors_F0, eigenvalues_F0] = eig(covMatrix_F0, 'vector');
+[eigenvectors_F1, eigenvalues_F1] = eig(covMatrix_F1, 'vector');
+
+% Sort the eigenvectors by descending eigenvalues
+[eigenvalues_F0, sortIdx_F0] = sort(eigenvalues_F0, 'descend');
+eigenvectors_F0 = eigenvectors_F0(:, sortIdx_F0);
+
+[eigenvalues_F1, sortIdx_F1] = sort(eigenvalues_F1, 'descend');
+eigenvectors_F1 = eigenvectors_F1(:, sortIdx_F1);
+
+% Project standardized data onto the PCA space to get the principal components
+principleComponents_F0 = standardizedData_F0 * eigenvectors_F0;
+principleComponents_F1 = standardizedData_F1 * eigenvectors_F1;
+
+% Calculate the percentage of variance explained by each principal component for F0
+variance_explained_F0 = eigenvalues_F0 / sum(eigenvalues_F0) * 100;
+variance_explained_F1 = eigenvalues_F1 / sum(eigenvalues_F1) * 100;
+
+figure;
+plot(variance_explained_F0, '-o');
+hold on;
+plot(variance_explained_F1, '--');
+grid on;
+title('Scree Plot for Variance versus Principal Component');
+xlabel('Principal Component');
+ylabel('Variance Explained (%)');
+legend("F0","F1")
+
+%%%%% Section B - 2 - b
+
+projection3D = standardizedData_F0 * eigenvectors_F0(:,1:3);
+
+figure;
+scatter3(projection3D(:,1), projection3D(:,2), projection3D(:,3), 'filled');
+title('Standardized Data of Electrode');
+xlabel('X Axis');
+ylabel('Y Axis');
+zlabel('Z Axis');
+hold on;
+
+
+
+
+
+
+
