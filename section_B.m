@@ -74,8 +74,8 @@ ylabel('Value');
 % e:Comment on your findings.
 
 %% section B - 2
-load(".\F0_Electro.mat");
-load(".\F1_Electro.mat")
+load("./PR_CW_DATA_2021/F0_Electro.mat");
+load("./PR_CW_DATA_2021/F1_Electro.mat")
 
 %%%%% Section B - 2 - a
 % Assuming dataMatrix_elec_F0 and dataMatrix_elec_F1 are already loaded and standardized
