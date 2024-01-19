@@ -231,8 +231,8 @@ save(saveFilename, 'dataMatrix_elec_F1');
 
 % load the data after sampling
 
-dataF0=load('E:\master-2\CVPR\CVPR\F0_PVT.mat');
-dataF1=load('E:\master-2\CVPR\CVPR\F1_PVT.mat');
+dataF0=load('F0_PVT.mat');
+dataF1=load('F1_PVT.mat');
 %dataEl1=load('E:\master-2\CVPR\CVPR\F0_Electro.mat');
 %dataEl2=load('E:\master-2\CVPR\CVPR\F1_Electro.mat');
 
@@ -260,9 +260,9 @@ scatter3(x(41:50), y(41:50), z(41:50), 30, 'c', 'filled');
 hold on;
 scatter3(x(51:end), y(51:end), z(51:end), 30, 'y', 'filled');
 
-xlabel('X-axis');
-ylabel('Y-axis');
-zlabel('Z-axis');
+xlabel('Vibration');
+ylabel('Pressure');
+zlabel('Temperature');
 grid on;
 
 % saveas(gcf, '3D_Scatter_Plot.png');
@@ -285,7 +285,7 @@ scatter3(x2(41:50), y2(41:50), z2(41:50), 30, 'c', 'filled');
 hold on;
 scatter3(x2(51:end), y2(51:end), z2(51:end), 30, 'y', 'filled');
 
-xlabel('X-axis');
-ylabel('Y-axis');
-zlabel('Z-axis');
+xlabel('Vibration');
+ylabel('Pressure');
+zlabel('Temperature');
 grid on;
