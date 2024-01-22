@@ -110,10 +110,10 @@ time = 25; % 待修改的时间捕获
 folderPath = './PR_CW_DATA_2021';
 files = dir(fullfile(folderPath, '*.mat'));
 % V, P, T
-% vibration, pressure, temperature
-% pac, pdc, tdc
-name_F0 = {'F0pac', 'F0pdc', 'F0tdc'};% 1: High Vibration 2: Low Pressure, 3:Temperature change 4:temperature
-name_F1 = {'F1pac',  'F1pdc',  'F1tdc'};
+% vibration, pressure, temperature change
+% pac, pdc, tac
+name_F0 = {'F0pac', 'F0pdc', 'F0tac'};% 1: High Vibration 2: Low Pressure, 3:Temperature change 4:temperature
+name_F1 = {'F1pac',  'F1pdc',  'F1tac'};
 name_Electro_F0 = {'F0Electrodes'}; % Electrodes
 name_Electro_F1 = {'F1Electrodes'}; % Electrodes
 
