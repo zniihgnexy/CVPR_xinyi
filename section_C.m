@@ -6,17 +6,33 @@ data1 = load("./PR_CW_DATA_2021/F1_PVT.mat");
 
 zeroOneColumn = [zeros(10, 1); ones(10, 1)];
 
-data0V = [data0.dataMatrix_F0(11:30,1) zeroOneColumn];
-data0P = [data0.dataMatrix_F0(11:30,2) zeroOneColumn];
-data0T = [data0.dataMatrix_F0(11:30,3) zeroOneColumn];
+% data0V = [data0.dataMatrix_F0(11:30,1) zeroOneColumn];
+% data0P = [data0.dataMatrix_F0(11:30,2) zeroOneColumn];
+% data0T = [data0.dataMatrix_F0(11:30,3) zeroOneColumn];
+% 
+% data1V = [data1.dataMatrix_F1(11:30,1) zeroOneColumn];
+% data1P = [data1.dataMatrix_F1(11:30,2) zeroOneColumn];
+% data1T = [data1.dataMatrix_F1(11:30,3) zeroOneColumn];
 
-data1V = [data1.dataMatrix_F1(11:30,1) zeroOneColumn];
-data1P = [data1.dataMatrix_F1(11:30,2) zeroOneColumn];
-data1T = [data1.dataMatrix_F1(11:30,3) zeroOneColumn];
-
-data0PV = [data0.dataMatrix_F0(11:30,1:2) zeroOneColumn];
+% data preprocessing 2D
+data0PV = [data0.dataMatrix_F0(11:20,1:2) zeros(10, 1);
+    data0.dataMatrix_F0(21:30,1:2) ones(10, 1)];
 data0PVX1 = data0PV(1:10,1:2);
 data0PVX2 = data0PV(11:20,1:2);
+
+data0PT = [data0.dataMatrix_F0(11:30,2:3) zeroOneColumn];
+data0PTX1 = data0PT(1:10,1:2);
+data0PTX2 = data0PT(11:20,1:2);
+
+data0TV = [data0.dataMatrix_F0(11:20,1) data0.dataMatrix_F0(11:20,3) zeros(10, 1);
+    data0.dataMatrix_F0(21:30,1) data0.dataMatrix_F0(21:30,3) ones(10, 1)];
+data0TVX1 = data0TV(1:10,1:2);
+data0TVX2 = data0TV(11:20,1:2);
+
+% 3D data PTV
+data0VPT = [data0.dataMatrix_F0(11:30,:) zeroOneColumn];
+data0VPTX1 = data0VPT(1:10,1:3);
+data0VPTX2 = data0VPT(11:20,1:3);
 
 features = data0PV(:,1:2);
 lalbels = zeroOneColumn;
