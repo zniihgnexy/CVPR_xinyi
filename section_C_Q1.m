@@ -35,7 +35,7 @@ data0VPTX2 = data0VPT(11:20,1:3);
 %% question A-1: Pressure vs Vibration
 
 features = data0PV(:,1:2);
-lalbels = zeroOneColumn;
+labels = zeroOneColumn;
 
 % mean values
 Mu = mean(data0PV);
@@ -95,7 +95,7 @@ hold off;
 %% question A-2: Pressure vs Temperature Change
 
 features = data0PT(:,1:2);
-lalbels = zeroOneColumn;
+labels = zeroOneColumn;
 
 % mean values
 Mu = mean(data0PT);
@@ -131,7 +131,7 @@ step = 0.001; % adjust length of hyperplane
 point1 = [0,0] - step * direction';
 point2 = [0,0] + step * direction';
 
-figure(1);
+figure(2);
 for i = 1:size(data0PV, 1)
     if data0PV(i,3) == 0
         plot(st_data0PT(i,1), st_data0PT(i,2), 'b*'); hold on; % Blue star for class 0
@@ -191,7 +191,7 @@ step = 0.001; % adjust length of hyperplane
 point1 = [0,0] - step * direction';
 point2 = [0,0] + step * direction';
 
-figure(1);
+figure(3);
 for i = 1:size(data0PV, 1)
     if data0PV(i,3) == 0
         plot(st_data0TV(i,1), st_data0TV(i,2), 'b*'); hold on; % Blue star for class 0
