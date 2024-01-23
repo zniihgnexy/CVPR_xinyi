@@ -72,4 +72,29 @@ W = eigenVectors(:, maxIdx);
 
 % projection
 projectedData = St_combinedData * W;
+direction = W - meanCombined;
 
+% step = 0.001;
+% point1 = [0,0] - step * direction';
+% point2 = [0,0] + step * direction';
+% point3 = [0,0] + step * direction';
+
+figure(1);
+for i = 1:size(data0PV, 1)
+    if data0PV(i,3) == 0
+        plot3(St_combinedData(i,1), St_combinedData(i,2),St_combinedData(i,3), 'b*'); hold on; % Blue star for class 0
+    elseif data0PV(i,3) == 1
+        plot3(St_combinedData(i,1), St_combinedData(i,2), St_combinedData(i,3), 'g*'); hold on; % Green star for class 1
+    end
+end
+
+legend('Class 0', 'Class 1');
+xlabel('Feature 1');
+ylabel('Feature 2');
+zlabel('Feature 3');
+title('LDA Classification Results in PVT');
+hold on;
+
+% plot([point1(1), point2(1), point3(1)], [point1(2), point2(2), point3(1)], 'k-', 'LineWidth', 2); % 'k-' 表示黑色实线
+
+hold off;

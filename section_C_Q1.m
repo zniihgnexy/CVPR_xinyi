@@ -58,7 +58,7 @@ invSw_by_SB = invSw * SB;
 W = eigenvectors(:,1);
 
 % LDA model functions
-ldaModel = fitcdiscr(features, labels);
+% ldaModel = fitcdiscr(features, labels);
 
 %data for plot
 st_data0PV = [St_dataMatrix_F0(11:30,1:2) zeroOneColumn];
@@ -76,7 +76,7 @@ for i = 1:size(data0PV, 1)
     if data0PV(i,3) == 0
         plot(st_data0PV(i,1), st_data0PV(i,2), 'b*'); hold on; % Blue star for class 0
     elseif data0PV(i,3) == 1
-        plot(st_data1PV(i,1), st_data1PV(i,2), 'g*'); hold on; % Green star for class 1
+        plot(st_data0PV(i,1), st_data0PV(i,2), 'g*'); hold on; % Green star for class 1
     end
 end
 hold on;
@@ -118,7 +118,7 @@ invSw_by_SB = invSw * SB;
 W = eigenvectors(:,1);
 
 % LDA model functions
-ldaModel = fitcdiscr(features, labels);
+% ldaModel = fitcdiscr(features, labels);
 
 %data for plot
 st_data0PT = [St_dataMatrix_F0(11:30,[2,3]) zeroOneColumn];
@@ -136,7 +136,7 @@ for i = 1:size(data0PV, 1)
     if data0PV(i,3) == 0
         plot(st_data0PT(i,1), st_data0PT(i,2), 'b*'); hold on; % Blue star for class 0
     elseif data0PV(i,3) == 1
-        plot(st_data1PT(i,1), st_data1PT(i,2), 'g*'); hold on; % Green star for class 1
+        plot(st_data0PT(i,1), st_data0PT(i,2), 'g*'); hold on; % Green star for class 1
     end
 end
 hold on;
@@ -178,7 +178,7 @@ invSw_by_SB = invSw * SB;
 W = eigenvectors(:,1);
 
 % LDA model functions
-ldaModel = fitcdiscr(features, labels);
+% ldaModel = fitcdiscr(features, labels);
 
 %data for plot
 st_data0TV = [St_dataMatrix_F0(11:30,[1,3]) zeroOneColumn];
@@ -196,7 +196,7 @@ for i = 1:size(data0PV, 1)
     if data0PV(i,3) == 0
         plot(st_data0TV(i,1), st_data0TV(i,2), 'b*'); hold on; % Blue star for class 0
     elseif data0PV(i,3) == 1
-        plot(st_data1TV(i,1), st_data1TV(i,2), 'g*'); hold on; % Green star for class 1
+        plot(st_data0TV(i,1), st_data0TV(i,2), 'g*'); hold on; % Green star for class 1
     end
 end
 hold on;
