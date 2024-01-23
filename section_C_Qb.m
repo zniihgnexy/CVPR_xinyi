@@ -74,10 +74,9 @@ W = eigenVectors(:, maxIdx);
 projectedData = St_combinedData * W;
 direction = W - meanCombined;
 
-% step = 0.001;
-% point1 = [0,0] - step * direction';
-% point2 = [0,0] + step * direction';
-% point3 = [0,0] + step * direction';
+step = 6.5;
+point1 = [0,0,0] - step * W';
+point2 = [0,0,0] + step * W';
 
 figure(1);
 for i = 1:size(data0PV, 1)
@@ -95,6 +94,30 @@ zlabel('Feature 3');
 title('LDA Classification Results in PVT');
 hold on;
 
-% plot([point1(1), point2(1), point3(1)], [point1(2), point2(2), point3(1)], 'k-', 'LineWidth', 2); % 'k-' 表示黑色实线
+plot3([point1(1,1),point2(1,1)], [point1(1,2),point2(1,2)],[point1(1,3),point2(1,3)],'k-'); % 'k-' 表示黑色实线
+
+hold on;
+
+
+% 假设 W 已经定义
+% 计算与 W 正交的向量
+orthogonalVector = cross(W, [1; 0; 0]); % 使用单位向量 [1,0,0]
+
+% 规范化向量以便更好地可视化
+orthogonalVector = orthogonalVector / norm(orthogonalVector);
+
+% 定义穿过 [0,0,0] 的线的两个点
+stepSize = 3; % 步长可以根据需要调整
+orthPoint1 = -stepSize * orthogonalVector';
+orthPoint2 = stepSize * orthogonalVector';
+
+% 在现有图上绘制正交线
+hold on;
+plot3([orthPoint1(1), orthPoint2(1)], [orthPoint1(2), orthPoint2(2)], [orthPoint1(3), orthPoint2(3)], 'r-'); 
+
+scatter3(0,0,0,"red");
+Hyperplane = fill3([point1(1),orthPoint1(1),point2(1),orthPoint2(1)],[point1(2),orthPoint1(2),point2(2),orthPoint2(2)],[point1(3),orthPoint1(3),point2(3),orthPoint2(3)],"blue");
+set(Hyperplane, 'FaceAlpha', 0.5);
+
 
 hold off;
