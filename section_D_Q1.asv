@@ -1,0 +1,49 @@
+%% section D Q1
+% clustering question
+
+data_clustering = projection2D;
+
+% N = 100;
+
+% centroid = zeros(2, N);
+x_data = data_clustering(:, 1);
+y_data = data_clustering(:, 2);
+
+iter_size = 100;
+label = zeros(20, 1);
+
+% calculate the center distance
+center_x1 = rand;
+center_x2 = rand;
+center_y1 = rand;
+center_y2 = rand;
+
+center_num1 = 0;
+center_num2 = 0;
+
+% traverse the distances
+
+for k=1:iter_size
+    % distance with the first center data_1
+    distance1 = (data_clustering(k,1) - center_x1)^2+(data_clustering(k,2) - center_y1)^2;
+    % distance with the second center data_2
+    distance2 = (data_clustering(k,1) - center_x2)^2+(data_clustering(k,2) - center_y2)^2;
+    
+    % classified to class 2
+    if distance1>distance2
+        label(k) = 1;
+        center_x2 = center_x2 + x_data(k);
+        center_y2 = center_y2 + y_data(k);
+        center_num2 = center_num2 + 1;
+    else
+        % classified to class 1
+        label(k) = 0;
+        center_x1 = center_x1 + x_data(k);
+        center_y1 = center_y1 + y_data(k);
+        center_num1 = center_num1 + 1;
+    end
+end
+
+center_x1 = center_x1/center_num1;
+center_y1 = center_y1
+
