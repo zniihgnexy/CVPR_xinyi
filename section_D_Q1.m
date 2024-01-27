@@ -1,5 +1,24 @@
 %% k means clustering
-data_clustering = projection2D(11:30,:);
+% data pre-processing
+
+standardizedDataCluster = (dataMatrix_F0(11:30, :) - mean(dataMatrix_F0(11:30, :))) ./ std(dataMatrix_F0(11:30, :));
+meanData = mean(standardizedDataCluster);
+
+covMatrixCluster = cov(dataMatrix_F0(11:30, :));
+[eigenvectors, eigenvalues] = eig(covMatrixCluster);
+% 
+% L_eig_vec = [];
+% for i = 1 : size(eigenvectors,2) 
+%     if( eigenvalues(i,i)>1 )
+%         L_eig_vec = [L_eig_vec eigenvectors(:,i)];
+%     end
+% end
+
+projection2DCluster = standardizedDataCluster * eigenvectors(:,1:2);
+
+%% clustering calculation
+% data_clustering = projection2DCluster(11:30,:);
+data_clustering = projection2DCluster;
 iter_size = size(data_clustering, 1);
 label = zeros(iter_size, 1);
 
@@ -13,10 +32,10 @@ center_x2 = rand;
 center_y2 = rand;
 
 % For convergence check
-prev_center_x1 = 0;
-prev_center_y1 = 0;
-prev_center_x2 = 0;
-prev_center_y2 = 0;
+prev_center_x1 = 5;
+prev_center_y1 = 5;
+prev_center_x2 = -5;
+prev_center_y2 = -5;
 
 while iter < max_iter && ...
       (abs(center_x1 - prev_center_x1) > 0.001 || abs(center_y1 - prev_center_y1) > 0.001 || ...
@@ -40,11 +59,13 @@ while iter < max_iter && ...
         distance2 = (data_clustering(k,1) - center_x2)^2 + (data_clustering(k,2) - center_y2)^2;
 
         if distance1 > distance2
+            % class 2
             label(k) = 2;
             center_x2 = center_x2 + data_clustering(k,1);
             center_y2 = center_y2 + data_clustering(k,2);
             center_num2 = center_num2 + 1;
         else
+            % class 1
             label(k) = 1;
             center_x1 = center_x1 + data_clustering(k,1);
             center_y1 = center_y1 + data_clustering(k,2);
