@@ -1,5 +1,6 @@
 %% k means clustering
 % data pre-processing
+%
 
 standardizedDataCluster = (dataMatrix_F0(11:30, :) - mean(dataMatrix_F0(11:30, :))) ./ std(dataMatrix_F0(11:30, :));
 meanData = mean(standardizedDataCluster);
