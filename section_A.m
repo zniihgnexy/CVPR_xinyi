@@ -1,10 +1,10 @@
 %% question1
-data1_1=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\acrylic_211_01_HOLD.mat');
-data2_1=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\black_foam_110_01_HOLD.mat');
-data3_1=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\car_sponge_101_01_HOLD.mat');
-data4_1=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\flour_sack_410_01_HOLD.mat');
-data5_1=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\kitchen_sponge_114_01_HOLD.mat');
-data6_1=load('E:\master-2\CVPR\CVPR\PR_CW_DATA_2021\steel_vase_702_01_HOLD.mat');
+data1_1=load('.\PR_CW_DATA_2021\acrylic_211_01_HOLD.mat');
+data2_1=load('.\PR_CW_DATA_2021\black_foam_110_01_HOLD.mat');
+data3_1=load('.\PR_CW_DATA_2021\car_sponge_101_01_HOLD.mat');
+data4_1=load('.\PR_CW_DATA_2021\flour_sack_410_01_HOLD.mat');
+data5_1=load('.\PR_CW_DATA_2021\kitchen_sponge_114_01_HOLD.mat');
+data6_1=load('.\PR_CW_DATA_2021\steel_vase_702_01_HOLD.mat');
 
 
 % question 1: load the original files and show the data from the same graph
@@ -234,8 +234,8 @@ save(saveFilename, 'dataMatrix_elec_F1');
 
 % load the data after sampling
 
-dataF0=load('F0_PVT.mat');
-dataF1=load('F1_PVT.mat');
+dataF0=load('.\PR_CW_DATA_2021\F0_PVT.mat');
+dataF1=load('.\PR_CW_DATA_2021\F1_PVT.mat');
 %dataEl1=load('E:\master-2\CVPR\CVPR\F0_Electro.mat');
 %dataEl2=load('E:\master-2\CVPR\CVPR\F1_Electro.mat');
 

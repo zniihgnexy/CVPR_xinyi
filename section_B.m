@@ -123,6 +123,7 @@ legend("F0","F1")
 %%%%% Section B - 2 - b
 
 projection3D = standardizedData_F0 * eigenvectors_F0(:,1:3);
+projection2D_electro = standardizedData_F0 * eigenvectors_F0(:,1:2);
 
 figure;
 scatter3(projection3D(:,1), projection3D(:,2), projection3D(:,3), 'filled');
