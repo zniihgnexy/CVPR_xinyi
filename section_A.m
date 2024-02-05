@@ -266,13 +266,13 @@ scatter3(x(1:10), y(1:10), z(1:10), 30, 'r', 'filled', 'DisplayName', 'Acrylic')
 hold on;
 scatter3(x(11:20), y(11:20), z(11:20), 30, 'g', 'filled', 'DisplayName', 'Black Foam');
 hold on;
-scatter3(x(21:30), y(21:30), z(21:30), 30, 'b', 'filled', 'DisplayName', 'Object 3');
+scatter3(x(21:30), y(21:30), z(21:30), 30, 'b', 'filled', 'DisplayName', 'Car Sponge');
 hold on;
-scatter3(x(31:40), y(31:40), z(31:40), 30, 'k', 'filled', 'DisplayName', 'Object 4');
+scatter3(x(31:40), y(31:40), z(31:40), 30, 'k', 'filled', 'DisplayName', 'Flour Sack');
 hold on;
-scatter3(x(41:50), y(41:50), z(41:50), 30, 'c', 'filled', 'DisplayName', 'Object 5');
+scatter3(x(41:50), y(41:50), z(41:50), 30, 'c', 'filled', 'DisplayName', 'Kitchen Sponge');
 hold on;
-scatter3(x(51:end), y(51:end), z(51:end), 30, 'y', 'filled', 'DisplayName', 'Object 6');
+scatter3(x(51:end), y(51:end), z(51:end), 30, 'y', 'filled', 'DisplayName', 'Steel Vase');
 
 xlabel('Vibration');
 ylabel('Pressure');
@@ -293,13 +293,13 @@ scatter3(x2(1:10), y2(1:10), z2(1:10), 30, 'r', 'filled', 'DisplayName', 'Acryli
 hold on;
 scatter3(x2(11:20), y2(11:20), z2(11:20), 30, 'g', 'filled', 'DisplayName', 'Black Foam');
 hold on;
-scatter3(x2(21:30), y2(21:30), z2(21:30), 30, 'b', 'filled', 'DisplayName', 'Object 3');
+scatter3(x2(21:30), y2(21:30), z2(21:30), 30, 'b', 'filled', 'DisplayName', 'Car Sponge');
 hold on;
-scatter3(x2(31:40), y2(31:40), z2(31:40), 30, 'k', 'filled', 'DisplayName', 'Object 4');
+scatter3(x2(31:40), y2(31:40), z2(31:40), 30, 'k', 'filled', 'DisplayName', 'Flour Sack');
 hold on;
-scatter3(x2(41:50), y2(41:50), z2(41:50), 30, 'c', 'filled', 'DisplayName', 'Object 5');
+scatter3(x2(41:50), y2(41:50), z2(41:50), 30, 'c', 'filled', 'DisplayName', 'Kitchen Sponge');
 hold on;
-scatter3(x2(51:end), y2(51:end), z2(51:end), 30, 'y', 'filled', 'DisplayName', 'Object 6');
+scatter3(x2(51:end), y2(51:end), z2(51:end), 30, 'y', 'filled', 'DisplayName', 'Steel Vase');
 
 xlabel('Vibration');
 ylabel('Pressure');
