@@ -121,8 +121,13 @@ W = eigenvectors(:,1);
 % ldaModel = fitcdiscr(features, labels);
 
 %data for plot
-st_data0PT = [St_dataMatrix_F0(11:30,[2,3]) zeroOneColumn];
-st_data1PT = [St_dataMatrix_F1(11:30,[2,3]) zeroOneColumn];
+% st_data0PT = [St_dataMatrix_F0(11:30,[2,3]) zeroOneColumn];
+% st_data1PT = [St_dataMatrix_F1(11:30,[2,3]) zeroOneColumn];
+
+st_data0PT = [St_dataMatrix_F0(11:20,[2,3]) zeros;
+    St_dataMatrix_F0(31:40,[2,3]) ones];
+st_data0PT = [St_dataMatrix_F0(11:20,[2,3]) zeros;
+    St_dataMatrix_F0(31:40,[2,3]) ones];
 
 % Draw Hyperplane for LDA
 direction = W - Mu(1:2);

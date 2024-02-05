@@ -116,7 +116,7 @@ legend
 
 % start_time = 1;
 % stop_time = 100;
-time = 25; % 待修改的时间捕获
+time = 25; % the time we want to use for seperation
 
 folderPath = './PR_CW_DATA_2021';
 files = dir(fullfile(folderPath, '*.mat'));
