@@ -10,96 +10,107 @@ data6_1=load('.\PR_CW_DATA_2021\steel_vase_702_01_HOLD.mat');
 % question 1: load the original files and show the data from the same graph
 % in order to show the differences between different objects
 
-figure(1)
-
 % plot the F0Electrodes values of different objects. in each object, we
 % take the average of electrodes
+figure(1)
+% Plotting the averages
 rowAverage = mean(data1_1.F0Electrodes, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Acrylic')
 hold on;
 rowAverage = mean(data2_1.F0Electrodes, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Black Foam')
 hold on;
 rowAverage = mean(data3_1.F0Electrodes, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Car Sponge')
 hold on;
 rowAverage = mean(data4_1.F0Electrodes, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Flour Sack')
 hold on;
 rowAverage = mean(data5_1.F0Electrodes, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Kitchen Sponge')
 hold on;
 rowAverage = mean(data6_1.F0Electrodes, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Steel Vase')
+title('Average F0 Electrode Values for Different Objects')
+legend
 
-
-
-figure(2)
 
 % plot the F0pac values of different objects
 % in each object, we take the average of electrodes
+figure(2)
+% Plotting the averages
 rowAverage = mean(data1_1.F0pac, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Acrylic')
 hold on;
 rowAverage = mean(data2_1.F0pac, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Black Foam')
 hold on;
 rowAverage = mean(data3_1.F0pac, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Car Sponge')
 hold on;
 rowAverage = mean(data4_1.F0pac, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Flour Sack')
 hold on;
 rowAverage = mean(data5_1.F0pac, 1);
-plot(rowAverage)
+plot(rowAverage, 'DisplayName', 'Kitchen Sponge')
 hold on;
 rowAverage = mean(data6_1.F0pac, 1);
-plot(rowAverage) 
-
-figure(3)
+plot(rowAverage, 'DisplayName', 'Steel Vase')
+title('Average F0pac Values for Different Objects')
+legend
 
 % plot the F0pdc values of different objects
-plot(data1_1.F0pdc)
+figure(3)
+% Plotting the data
+plot(data1_1.F0pdc, 'DisplayName', 'Acrylic')
 hold on;
-plot(data2_1.F0pdc)
+plot(data2_1.F0pdc, 'DisplayName', 'Black Foam')
 hold on;
-plot(data3_1.F0pdc)
+plot(data3_1.F0pdc, 'DisplayName', 'Car Sponge')
 hold on;
-plot(data4_1.F0pdc)
+plot(data4_1.F0pdc, 'DisplayName', 'Flour Sack')
 hold on;
-plot(data5_1.F0pdc)
+plot(data5_1.F0pdc, 'DisplayName', 'Kitchen Sponge')
 hold on;
-plot(data6_1.F0pdc) 
+plot(data6_1.F0pdc, 'DisplayName', 'Steel Vase')
+title('F0pdc Values for Different Objects')
+legend
 
-figure(4)
 
 % plot the F0tac values of different objects
-plot(data1_1.F0tac)
+figure(4)
+% Plotting the data
+plot(data1_1.F0tac, 'DisplayName', 'Acrylic')
 hold on;
-plot(data2_1.F0tac)
+plot(data2_1.F0tac, 'DisplayName', 'Black Foam')
 hold on;
-plot(data3_1.F0tac)
+plot(data3_1.F0tac, 'DisplayName', 'Car Sponge')
 hold on;
-plot(data4_1.F0tac)
+plot(data4_1.F0tac, 'DisplayName', 'Flour Sack')
 hold on;
-plot(data5_1.F0tac)
+plot(data5_1.F0tac, 'DisplayName', 'Kitchen Sponge')
 hold on;
-plot(data6_1.F0tac)
-
-figure(5)
+plot(data6_1.F0tac, 'DisplayName', 'Steel Vase')
+title('F0tac Values for Different Objects')
+legend
 
 % plot the F0tdc values of different objects
-plot(data1_1.F0tdc)
+figure(5)
+% Plotting the data
+plot(data1_1.F0tdc, 'DisplayName', 'Acrylic')
 hold on;
-plot(data2_1.F0tdc)
+plot(data2_1.F0tdc, 'DisplayName', 'Black Foam')
 hold on;
-plot(data3_1.F0tdc)
+plot(data3_1.F0tdc, 'DisplayName', 'Car Sponge')
 hold on;
-plot(data4_1.F0tdc)
+plot(data4_1.F0tdc, 'DisplayName', 'Flour Sack')
 hold on;
-plot(data5_1.F0tdc)
+plot(data5_1.F0tdc, 'DisplayName', 'Kitchen Sponge')
 hold on;
-plot(data6_1.F0tdc) 
+plot(data6_1.F0tdc, 'DisplayName', 'Steel Vase')
+title('F0tdc Values for Different Objects')
+legend
+
 
 %% question2
 
@@ -251,21 +262,23 @@ x = dataMatrix_F0(:, 1);
 y = dataMatrix_F0(:, 2);
 z = dataMatrix_F0(:, 3);
 
-scatter3(x(1:10), y(1:10), z(1:10), 30, 'r', 'filled');
+scatter3(x(1:10), y(1:10), z(1:10), 30, 'r', 'filled', 'DisplayName', 'Acrylic');
 hold on;
-scatter3(x(11:20), y(11:20), z(11:20), 30, 'g', 'filled');
+scatter3(x(11:20), y(11:20), z(11:20), 30, 'g', 'filled', 'DisplayName', 'Black Foam');
 hold on;
-scatter3(x(21:30), y(21:30), z(21:30), 30, 'b', 'filled');
+scatter3(x(21:30), y(21:30), z(21:30), 30, 'b', 'filled', 'DisplayName', 'Object 3');
 hold on;
-scatter3(x(31:40), y(31:40), z(31:40), 30, 'k', 'filled');
+scatter3(x(31:40), y(31:40), z(31:40), 30, 'k', 'filled', 'DisplayName', 'Object 4');
 hold on;
-scatter3(x(41:50), y(41:50), z(41:50), 30, 'c', 'filled');
+scatter3(x(41:50), y(41:50), z(41:50), 30, 'c', 'filled', 'DisplayName', 'Object 5');
 hold on;
-scatter3(x(51:end), y(51:end), z(51:end), 30, 'y', 'filled');
+scatter3(x(51:end), y(51:end), z(51:end), 30, 'y', 'filled', 'DisplayName', 'Object 6');
 
 xlabel('Vibration');
 ylabel('Pressure');
 zlabel('Temperature');
+title('3D Scatter Plot for F0 Parameters');
+legend('Location', 'best');
 grid on;
 
 % saveas(gcf, '3D_Scatter_Plot.png');
@@ -276,19 +289,21 @@ x2 = dataMatrix_F1(:, 1);
 y2 = dataMatrix_F1(:, 2);
 z2 = dataMatrix_F1(:, 3);
 
-scatter3(x2(1:10), y2(1:10), z2(1:10), 30, 'r', 'filled');
+scatter3(x2(1:10), y2(1:10), z2(1:10), 30, 'r', 'filled', 'DisplayName', 'Acrylic');
 hold on;
-scatter3(x2(11:20), y2(11:20), z2(11:20), 30, 'g', 'filled');
+scatter3(x2(11:20), y2(11:20), z2(11:20), 30, 'g', 'filled', 'DisplayName', 'Black Foam');
 hold on;
-scatter3(x2(21:30), y2(21:30), z2(21:30), 30, 'b', 'filled');
+scatter3(x2(21:30), y2(21:30), z2(21:30), 30, 'b', 'filled', 'DisplayName', 'Object 3');
 hold on;
-scatter3(x2(31:40), y2(31:40), z2(31:40), 30, 'k', 'filled');
+scatter3(x2(31:40), y2(31:40), z2(31:40), 30, 'k', 'filled', 'DisplayName', 'Object 4');
 hold on;
-scatter3(x2(41:50), y2(41:50), z2(41:50), 30, 'c', 'filled');
+scatter3(x2(41:50), y2(41:50), z2(41:50), 30, 'c', 'filled', 'DisplayName', 'Object 5');
 hold on;
-scatter3(x2(51:end), y2(51:end), z2(51:end), 30, 'y', 'filled');
+scatter3(x2(51:end), y2(51:end), z2(51:end), 30, 'y', 'filled', 'DisplayName', 'Object 6');
 
 xlabel('Vibration');
 ylabel('Pressure');
 zlabel('Temperature');
+title('3D Scatter Plot for F1 Parameters');
+legend('Location', 'best');
 grid on;
