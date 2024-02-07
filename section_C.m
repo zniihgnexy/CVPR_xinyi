@@ -64,16 +64,17 @@ W = eigenvectors(:,1);
 ldaModel = fitcdiscr(features, lalbels);
 
 figure(1);
-% for i = 1:size(data0PV, 1)
-%     if data0PV(i,3) == 0
-%         plot(data0PV(i,1), data0PV(i,2), 'b*'); hold on; % Blue star for class 0
-%     elseif data0PV(i,3) == 1
-%         plot(data0PV(i,1), data0PV(i,2), 'g*'); hold on; % Green star for class 1
-%     end
-% end
-% hold off;
 
-gscatter(data0PV(:,1), data0PV(:,2), ldaResubPredict, 'bg', 'x*');
+for i = 1:size(data0PV, 1)
+    if data0PV(i,3) == 0
+        plot(data0PV(i,1), data0PV(i,2), 'b*'); hold on; % Blue star for class 0
+    elseif data0PV(i,3) == 1
+        plot(data0PV(i,1), data0PV(i,2), 'g*'); hold on; % Green star for class 1
+    end
+end
+hold on;
+
+% gscatter(data0PV(:,1), data0PV(:,2), ldaResubPredict, 'bg', 'x*');
 legend('Class 0', 'Class 1');
 xlabel('Feature 1');
 ylabel('Feature 2');
@@ -81,8 +82,8 @@ title('LDA Classification Results');
 hold on;
 
 % plot the classification line
-start_point = (Mu*W'*(-2));
-end_point = (Mu*W'*(2));
-plot(start_point, end_point, "b-");
+% start_point = (Mu(1:2)*W*3);
+% end_point = (Mu(1:2)*W*-2);
+% plot(start_point, end_point, "b-");
 
 hold off;
