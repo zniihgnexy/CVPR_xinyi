@@ -39,10 +39,24 @@ data0PTX2 = data0PT(11:20,1:2);
 
 data0TV = [data0.dataMatrix_F0(21:30,1) data0.dataMatrix_F0(21:30,3) zeros(10, 1);
     data0.dataMatrix_F0(51:60,1) data0.dataMatrix_F0(51:60,3) ones(10, 1)];
+% data preprocessing 2D
+data0PV = [data0.dataMatrix_F0(11:20,1:2) zeros(10, 1);
+    data0.dataMatrix_F0(21:30,1:2) ones(10, 1)];
+data0PVX1 = data0PV(1:10,1:2);
+data0PVX2 = data0PV(11:20,1:2);
+
+data0PT = [data0.dataMatrix_F0(11:30,2:3) zeroOneColumn];
+data0PTX1 = data0PT(1:10,1:2);
+data0PTX2 = data0PT(11:20,1:2);
+
+data0TV = [data0.dataMatrix_F0(11:20,1) data0.dataMatrix_F0(11:20,3) zeros(10, 1);
+    data0.dataMatrix_F0(21:30,1) data0.dataMatrix_F0(21:30,3) ones(10, 1)];
+
 data0TVX1 = data0TV(1:10,1:2);
 data0TVX2 = data0TV(11:20,1:2);
 
 % 3D data PTV
+
 data0VPT = [data0.dataMatrix_F0(21:30,:) zeros(10, 1);
     data0.dataMatrix_F0(51:60,:) ones(10, 1);];
 data0VPTX1 = data0VPT(1:10,1:3);

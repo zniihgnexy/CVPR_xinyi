@@ -74,21 +74,21 @@ point2 = [0,0] + step * direction';
 figure(1);
 for i = 1:size(data0PV, 1)
     if data0PV(i,3) == 0
-        plot(st_data0PV(i,1), st_data0PV(i,2), 'b*'); hold on; % Blue star for class 0
+        plot(st_data0PV(i,1), st_data0PV(i,2), 'bo'); hold on;
     elseif data0PV(i,3) == 1
-        plot(st_data0PV(i,1), st_data0PV(i,2), 'g*'); hold on; % Green star for class 1
+        plot(st_data0PV(i,1), st_data0PV(i,2), 'go'); hold on;
     end
 end
 hold on;
 
 % gscatter(data0PV(:,1), data0PV(:,2), ldaResubPredict, 'bg', 'x*');
-legend('Class 0', 'Class 1');
-xlabel('Feature 1');
-ylabel('Feature 2');
+% legend('Class 0', 'Class 1');
+xlabel('Pressure');
+ylabel('Vibration');
 title('LDA Classification Results in Pr vs Vib');
 hold on;
 
-plot([point1(1), point2(1)], [point1(2), point2(2)], 'k-', 'LineWidth', 2); % 'k-' 表示黑色实线
+plot([point1(1), point2(1)], [point1(2), point2(2)], 'k-', 'LineWidth', 2);
 
 hold off;
 
@@ -134,15 +134,15 @@ point2 = [0,0] + step * direction';
 figure(2);
 for i = 1:size(data0PV, 1)
     if data0PV(i,3) == 0
-        plot(st_data0PT(i,1), st_data0PT(i,2), 'b*'); hold on; % Blue star for class 0
+        plot(st_data0PT(i,1), st_data0PT(i,2), 'bo'); hold on; % Blue star for class 0
     elseif data0PV(i,3) == 1
-        plot(st_data0PT(i,1), st_data0PT(i,2), 'g*'); hold on; % Green star for class 1
+        plot(st_data0PT(i,1), st_data0PT(i,2), 'go'); hold on; % Green star for class 1
     end
 end
 hold on;
 
 % gscatter(data0PV(:,1), data0PV(:,2), ldaResubPredict, 'bg', 'x*');
-legend('Class 0', 'Class 1');
+% legend('Class 0', 'Class 1');
 xlabel('Feature 1');
 ylabel('Feature 2');
 title('LDA Classification Results in Pr vs Temp');
@@ -194,18 +194,18 @@ point2 = [0,0] + step * direction';
 figure(3);
 for i = 1:size(data0PV, 1)
     if data0PV(i,3) == 0
-        plot(st_data0TV(i,1), st_data0TV(i,2), 'b*'); hold on; % Blue star for class 0
+        plot(st_data0TV(i,1), st_data0TV(i,2), 'bo'); hold on; % Blue star for class 0
     elseif data0PV(i,3) == 1
-        plot(st_data0TV(i,1), st_data0TV(i,2), 'g*'); hold on; % Green star for class 1
+        plot(st_data0TV(i,1), st_data0TV(i,2), 'go'); hold on; % Green star for class 1
     end
 end
 hold on;
 
 % gscatter(data0PV(:,1), data0PV(:,2), ldaResubPredict, 'bg', 'x*');
-legend('Class 0', 'Class 1');
+% legend('Class 0', 'Class 1');
 xlabel('Feature 1');
 ylabel('Feature 2');
-title('LDA Classification Results in Pr vs Temp');
+title('LDA Classification Results in Vib vs Temp');
 hold on;
 
 plot([point1(1), point2(1)], [point1(2), point2(2)], 'k-', 'LineWidth', 2); % 'k-' 表示黑色实线
