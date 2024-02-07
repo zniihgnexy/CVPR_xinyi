@@ -1,15 +1,22 @@
 %%section B - 1
 % a: covariance matrix, eigenvalues, and eigenvectors
 covMatrix_F0 = cov(dataMatrix_F0);
+covMatrix_F1 = cov(dataMatrix_F1);
 % eigenvectors V, eigenvalues D
 [eigenvectors, eigenvalues] = eig(covMatrix_F0);
+[eigenvectors_F1, eigenvalues_F1] = eig(covMatrix_F1);
 
 disp('Eigenvectors:');
 disp(eigenvectors);
 disp('Eigenvalues:');
 disp(diag(eigenvalues));
 
-% b: Replot the Standardised data with the Principal components displayed
+disp('Eigenvectors_F1:');
+disp(eigenvectors_F1);
+disp('Eigenvalues_F1:');
+disp(diag(eigenvalues_F1));
+
+%% b: Replot the Standardised data with the Principal components displayed
 
 standardizedData = (dataMatrix_F0 - mean(dataMatrix_F0)) ./ std(dataMatrix_F0);
 meanData = mean(standardizedData);
@@ -17,9 +24,9 @@ meanData = mean(standardizedData);
 figure(1);
 scatter3(standardizedData(:,1), standardizedData(:,2), standardizedData(:,3), 'filled');
 title('Standardized Data with Principal Components');
-xlabel('Variable 1');
-ylabel('Variable 2');
-zlabel('Variable 3');
+xlabel('Vibration');
+ylabel('Pressure');
+zlabel('Temperature');
 hold on;
 
 for i = 1:size(eigenvectors,2)
