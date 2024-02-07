@@ -119,9 +119,9 @@ for i = 1:size(data0PV, 1)
 end
 
 legend('Class 0', 'Class 1');
-xlabel('Feature 1');
-ylabel('Feature 2');
-zlabel('Feature 3');
+xlabel('Vibrations');
+ylabel('Pressure');
+zlabel('Temperature Change');
 title('LDA Classification Results in PVT');
 hold on;
 

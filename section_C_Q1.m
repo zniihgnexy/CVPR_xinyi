@@ -54,8 +54,8 @@ invSw = inv(Sw);
 invSw_by_SB = invSw * SB;
 
 % get the projection vector
-[eigenvectors, eigenvalues] = eig(invSw_by_SB);
-W = eigenvectors(:,1);
+[eigenvectors1, eigenvalues1] = eig(invSw_by_SB);
+W = eigenvectors1(:,1);
 
 % LDA model functions
 % ldaModel = fitcdiscr(features, labels);
@@ -114,8 +114,8 @@ invSw = inv(Sw);
 invSw_by_SB = invSw * SB;
 
 % get the projection vector
-[eigenvectors, eigenvalues] = eig(invSw_by_SB);
-W = eigenvectors(:,1);
+[eigenvectors2, eigenvalues2] = eig(invSw_by_SB);
+W = eigenvectors2(:,1);
 
 % LDA model functions
 % ldaModel = fitcdiscr(features, labels);
@@ -143,8 +143,8 @@ hold on;
 
 % gscatter(data0PV(:,1), data0PV(:,2), ldaResubPredict, 'bg', 'x*');
 % legend('Class 0', 'Class 1');
-xlabel('Feature 1');
-ylabel('Feature 2');
+xlabel('Pressure');
+ylabel('Temperature Change');
 title('LDA Classification Results in Pr vs Temp');
 hold on;
 
@@ -174,8 +174,8 @@ invSw = inv(Sw);
 invSw_by_SB = invSw * SB;
 
 % get the projection vector
-[eigenvectors, eigenvalues] = eig(invSw_by_SB);
-W = eigenvectors(:,1);
+[eigenvectors3, eigenvalues3] = eig(invSw_by_SB);
+W = eigenvectors3(:,1);
 
 % LDA model functions
 % ldaModel = fitcdiscr(features, labels);
@@ -203,8 +203,8 @@ hold on;
 
 % gscatter(data0PV(:,1), data0PV(:,2), ldaResubPredict, 'bg', 'x*');
 % legend('Class 0', 'Class 1');
-xlabel('Feature 1');
-ylabel('Feature 2');
+xlabel('Vibration');
+ylabel('Temperature Change');
 title('LDA Classification Results in Vib vs Temp');
 hold on;
 
