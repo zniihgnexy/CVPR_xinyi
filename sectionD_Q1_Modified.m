@@ -1,6 +1,9 @@
 %% k means clustering
 % data pre-processing
 
+load("./PR_CW_DATA_2021/F0_PVT.mat");
+load("./PR_CW_DATA_2021/F1_PVT.mat");
+
 standardizedDataCluster = (dataMatrix_F1(1:60, :) - mean(dataMatrix_F1(1:60, :))) ./ std(dataMatrix_F1(1:60, :));
 meanData = mean(standardizedDataCluster);
 
@@ -9,7 +12,7 @@ centers = -2.5 + 4.*rand(6, 3);
 % Disance metric options:
 % dist_metric = ["Euclidean","Manhattan","Minkowski","Chebyshev","Cosine Distance"];
 
-dist_metric = "Cosine Distance";
+dist_metric = "Euclidean";
 Minkowski_P = 3; % only used in Minkowski distance calculation
 
 labels = ["acrylic", "black foam", "car sponge", "flour sack", "kitchen sponge", "steel vase"];

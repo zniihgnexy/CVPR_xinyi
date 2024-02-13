@@ -30,7 +30,7 @@ meanData = mean(standardizedData);
 figure(1);
 for i = 1:length(standardizedData(:,1))/10
     idxStart = (i-1)*10 + 1;
-    idxEnd = min(i*10, n);
+    idxEnd = i*10;
     scatterObjects_Qb1(i) = scatter3(standardizedData(idxStart:idxEnd,1), standardizedData(idxStart:idxEnd,2), standardizedData(idxStart:idxEnd,3), 'filled', 'DisplayName', labels(i));
     hold on; % 保持当前图像，以便在上面添加更多的散点图
 end
@@ -68,7 +68,7 @@ projection2D = standardizedData * eigenvectors(:,1:2);
 figure(2);
 for i = 1:length(standardizedData(:,1))/10
     idxStart = (i-1)*10 + 1;
-    idxEnd = min(i*10, n);
+    idxEnd = i*10;
     scatterObjects_Qb2(i) = scatter(projection2D(idxStart:idxEnd,1), projection2D(idxStart:idxEnd,2), 'filled','DisplayName', labels(i));
     hold on; % 保持当前图像，以便在上面添加更多的散点图
 end
@@ -86,27 +86,45 @@ figure(3);
 
 for i = 1:length(standardizedData(:,1))/10
     idxStart = (i-1)*10 + 1;
-    idxEnd = min(i*10, n);
-    scatter(projection1D_1(idxStart:idxStart), zeros(10,1), 'filled','DisplayName', labels(i));
+    idxEnd = i*10;
+    scatter(projection1D_1(idxStart:idxEnd), zeros(10,1), 'filled','DisplayName', labels(i));
     hold on; % 保持当前图像，以便在上面添加更多的散点图
 end
 
 % scatter(projection1D_1, zeros(size(projection1D_1)), 'filled');
-legend(scatterObjects_Qb3, 'Location', 'best');
+legend('Location', 'best');
 title('1D Projection onto the First Principal Component');
 xlabel('First Principal Component');
 ylabel('Value');
 
 projection1D_2 = standardizedData * eigenvectors(:,2);
 figure(4);
-scatter(projection1D_2, zeros(size(projection1D_2)), 'filled');
+
+for i = 1:length(standardizedData(:,1))/10
+    idxStart = (i-1)*10 + 1;
+    idxEnd = i*10;
+    scatter(projection1D_2(idxStart:idxEnd), zeros(10,1), 'filled','DisplayName', labels(i));
+    hold on; % 保持当前图像，以便在上面添加更多的散点图
+end
+
+legend('Location', 'best');
 title('1D Projection onto the Second Principal Component');
 xlabel('Second Principal Component');
 ylabel('Value');
 
+
+
 projection1D_3 = standardizedData * eigenvectors(:,3);
 figure(5);
-scatter(projection1D_3, zeros(size(projection1D_3)), 'filled');
+
+for i = 1:length(standardizedData(:,1))/10
+    idxStart = (i-1)*10 + 1;
+    idxEnd = i*10;
+    scatter(projection1D_3(idxStart:idxEnd), zeros(10,1), 'filled','DisplayName', labels(i));
+    hold on; % 保持当前图像，以便在上面添加更多的散点图
+end
+
+legend('Location', 'best');
 title('1D Projection onto the Third Principal Component');
 xlabel('Third Principal Component');
 ylabel('Value');
