@@ -47,7 +47,7 @@ S1 = cov(data0PVX1 - Mu1);
 S2 = cov(data0PVX2 - Mu2);
 Sw = S1 + S2;
 
-SB = (Mu1-Mu2)*(Mu1-Mu2)';
+SB = (Mu1-Mu2)'*(Mu1-Mu2);
 
 % LDA projection
 invSw = inv(Sw);
@@ -107,7 +107,7 @@ S1 = cov(data0PTX1 - Mu1);
 S2 = cov(data0PTX2 - Mu2);
 Sw = S1 + S2;
 
-SB = (Mu1-Mu2)*(Mu1-Mu2)';
+SB = (Mu1-Mu2)'*(Mu1-Mu2);
 
 % LDA projection
 invSw = inv(Sw);
@@ -167,7 +167,7 @@ S1 = cov(data0TVX1 - Mu1);
 S2 = cov(data0TVX2 - Mu2);
 Sw = S1 + S2;
 
-SB = (Mu1-Mu2)*(Mu1-Mu2)';
+SB = (Mu1-Mu2)'*(Mu1-Mu2);
 
 % LDA projection
 invSw = inv(Sw);
