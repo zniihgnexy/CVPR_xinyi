@@ -94,7 +94,7 @@ Sw = Sw + cov(class2Data);
 
 % calculate Sb
 meanDiffBetween = (meanClass1 - meanClass2)';
-Sb = (meanDiffBetween * meanDiffBetween') * size(class1Data, 1);
+Sb = (meanDiffBetween' * meanDiffBetween) * size(class1Data, 1);
 
 % eigen
 [eigenVectors, eigenValues] = eig(inv(Sw) * Sb);
