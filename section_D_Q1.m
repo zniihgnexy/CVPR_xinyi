@@ -1,16 +1,18 @@
 %% k means clustering
 % data pre-processing
 
-standardizedDataCluster = (dataMatrix_F0(1:50, :) - mean(dataMatrix_F0(1:50, :))) ./ std(dataMatrix_F0(1:50, :));
+standardizedDataCluster = (dataMatrix_F0(1:60, :) - mean(dataMatrix_F0(1:60, :))) ./ std(dataMatrix_F0(1:60, :));
 meanData = mean(standardizedDataCluster);
 
-covMatrixCluster = cov(dataMatrix_F0(11:30, :));
+covMatrixCluster = cov(dataMatrix_F0(1:60, :));
 [eigenvectors, eigenvalues] = eig(covMatrixCluster);
+
+centers = -2.5 + 4.*rand(6, 2);
 
 % Disance metric options:
 % dist_metric = ["Euclidean","Manhattan","Minkowski","Chebyshev","Cos"];
 
-dist_metric = "Cos";
+dist_metric = "Euclidean";
 Minkowski_P = 3; % only used in Minkowski distance calculation
 
 % 
@@ -27,7 +29,21 @@ projection2DCluster = standardizedDataCluster * eigenvectors(:,1:2);
 % data_clustering = projection2DCluster(11:30,:);
 data_clustering = projection2DCluster;
 iter_size = size(data_clustering, 1);
-label = zeros(iter_size, 1);
+
+label_1 = ones(10, 1);
+label_2 = ones(10, 1)*2;
+label_3 = ones(10, 1)*3;
+label_4 = ones(10, 1)*4;
+label_5 = ones(10, 1)*5;
+label_6 = ones(10, 1)*6;
+
+label = [label_1;label_2;label_3;label_4;label_5;label_6];
+
+gscatter(data_clustering(:,1), data_clustering(:,2), label);
+grid off;
+
+
+
 
 max_iter = 1000;
 iter = 0;
@@ -36,8 +52,6 @@ iter = 0;
 % center_y1 = rand;
 % center_x2 = rand;
 % center_y2 = rand;
-
-centers = -2.5 + 4.*rand(size(data_clustering,1)/10, 2);
 
 % For convergence check
 prev_centers = zeros(size(centers));
@@ -101,6 +115,8 @@ while condition
         label_cluster(i) = (linearIndex);
     end
     unique_elements = sort(unique(label_cluster));
+
+    new_labels = zeros(60,1);
     
     % 对于每个不同的元素，找到它们的索引
     for i = 1:length(unique_elements)
