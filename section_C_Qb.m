@@ -71,7 +71,7 @@ Sw = Sw + cov(class1Data);
 Sw = Sw + cov(class2Data);
 
 % calculate Sb
-meanDiffBetween = (meanClass1 - meanClass2)';
+meanDiffBetween = (meanClass1 - meanClass2);
 Sb = meanDiffBetween' * meanDiffBetween;
 
 % eigen
