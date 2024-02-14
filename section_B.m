@@ -1,6 +1,6 @@
 %%section B - 1
 folderPath = './PR_CW_DATA_2021';
-colors = ['r', 'g', 'b', 'k', 'c', [200 100 16]/256];
+colors = ['r', 'g', 'b', 'k', 'c', 'y'];
 labels = {'Acrylic', 'Black Foam', 'Car Sponge', 'Flour Sack', 'Kitchen Sponge', 'Steel Vase'};
 
 %Data Read
