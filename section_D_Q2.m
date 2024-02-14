@@ -1,4 +1,4 @@
-leaf = [5 10 20 50 100];
+leaf = [5 10 15 20 25 30 35 40 45 50];
 col = 'rbcmy';
 
 load("./PR_CW_DATA_2021/Electro_projection3D_F0.mat");
@@ -40,23 +40,58 @@ end
 
 accuracy = [];
 
-for i=1:length(leaf)
-    baggedModel = TreeBagger(leaf(i), train_data,train_labels , 'OOBPredictorImportance', 'On');
-    
-    view(baggedModel.Trees{1}, 'Mode', 'graph'); % Visualize the first tree
-    view(baggedModel.Trees{2}, 'Mode', 'graph'); % Visualize the second tree
-    
+numTrials = 20; % 设置循环次数
+accuracyMat = zeros(length(leaf), numTrials); % 初始化存储accuracy的矩阵
+
+
+%%
+for i = 1:length(leaf)
+    baggedModel = TreeBagger(leaf(i), train_data, train_labels, 'OOBPredictorImportance', 'On');
+
     % c. Run the trained model with the test data and display a confusion matrix
-    [Y_pred, scores] = predict(baggedModel, test_data);
+    [Y_pred, ~] = predict(baggedModel, test_data);
     confMat = confusionmat(test_labels, str2double(Y_pred));
+
     figure; 
     confusionchart(confMat);
     xlabel('Predicted Class');
     ylabel('True Class');
     title('Confusion Matrix');
-    
-    % Calculate and print overall accuracy
-    accuracy = [accuracy,sum(diag(confMat)) / sum(confMat(:))];
-    fprintf('Overall accuracy: %.2f%%\n', accuracy * 100);
 
+    % Calculate accuracy for this trial and leaf
+    currentAccuracy = sum(diag(confMat)) / sum(confMat(:));
+    accuracyMat(i, trial) = currentAccuracy; % Store accuracy
 end
+%%
+
+for trial = 1:numTrials
+    for i = 1:length(leaf)
+        baggedModel = TreeBagger(leaf(i), train_data, train_labels, 'OOBPredictorImportance', 'On');
+
+        % c. Run the trained model with the test data and display a confusion matrix
+        [Y_pred, ~] = predict(baggedModel, test_data);
+        confMat = confusionmat(test_labels, str2double(Y_pred));
+
+        figure; 
+        confusionchart(confMat);
+        xlabel('Predicted Class');
+        ylabel('True Class');
+        title('Confusion Matrix');
+
+        % Calculate accuracy for this trial and leaf
+        currentAccuracy = sum(diag(confMat)) / sum(confMat(:));
+        accuracyMat(i, trial) = currentAccuracy; % Store accuracy
+    end
+end
+
+% Calculate and print the average accuracy for each leaf
+averageAccuracy = mean(accuracyMat, 2); % Calculate mean across trials
+
+for i = 1:length(leaf)
+    fprintf('Leaf %d: Average Accuracy = %.2f%%\n', leaf(i), averageAccuracy(i) * 100);
+end
+
+fprintf('Overall accuracy: %.2f%%\n', accuracy * 100);
+
+    view(baggedModel.Trees{25}, 'Mode', 'graph'); % Visualize the first tree
+    view(baggedModel.Trees{30}, 'Mode', 'graph'); % Visualize the second tree

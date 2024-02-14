@@ -12,10 +12,12 @@ centers = -2.5 + 4.*rand(6, 3);
 % Disance metric options:
 % dist_metric = ["Euclidean","Manhattan","Minkowski","Chebyshev","Cosine Distance"];
 
-dist_metric = "Euclidean";
+dist_metric = "Cosine Distance";
 Minkowski_P = 3; % only used in Minkowski distance calculation
 
-labels = ["acrylic", "black foam", "car sponge", "flour sack", "kitchen sponge", "steel vase"];
+colors = [[0 0.4470 0.7410], [0.8500 0.3250 0.0980], 'b', 'k', 'c',[0.6350 0.0780 0.1840]];
+labels = {'Acrylic', 'Black Foam', 'Car Sponge', 'Flour Sack', 'Kitchen Sponge', 'Steel Vase'};
+
 
 %% clustering calculation
 % data_clustering = projection2DCluster(11:30,:);
@@ -39,7 +41,7 @@ figure;
 for i = 1:length(labels)
     idxStart = (i-1)*10 + 1;
     idxEnd = i*10; % 假设 n 已正确定义，这里直接使用 i*10
-    scatterObjects(i) = scatter3(data_clustering(idxStart:idxEnd,1), data_clustering(idxStart:idxEnd,2), data_clustering(idxStart:idxEnd,3), 'filled', 'DisplayName', labels{i});
+    scatterObjects(i) = scatter3(data_clustering(idxStart:idxEnd,1), data_clustering(idxStart:idxEnd,2), data_clustering(idxStart:idxEnd,3),36,colors(i) ,'filled', 'DisplayName', labels{i});
     hold on; % 保持当前图像，以便在上面添加更多的散点图
 end
 
@@ -131,6 +133,7 @@ end
 scatterObjects_2 = gobjects(length(unique_elements), 1); 
 labels = ["cluster 1", "cluster 2", "cluster 3", "cluster 4", "cluster 5", "cluster 6"];
 labels_2 = ["center 1", "center 2", "center 3", "center 4", "center 5", "center 6"];
+colors = [[0 0.4470 0.7410], [0.8500 0.3250 0.0980], 'b', 'k', 'c',[0.6350 0.0780 0.1840]];
 
 
 figure;
@@ -138,7 +141,7 @@ figure;
 for i = 1:length(unique_elements)
     element = unique_elements(i);
     index_list = find(label_cluster == element);
-    scatterObjects_2(i) = scatter3(data_clustering(index_list,1), data_clustering(index_list,2), data_clustering(index_list,3), 'filled','DisplayName', labels{i});
+    scatterObjects_2(i) = scatter3(data_clustering(index_list,1), data_clustering(index_list,2), data_clustering(index_list,3),36,colors(i), 'filled','DisplayName', labels{i});
     hold on; % 保持当前图像，以便在上面添加更多的散点图
 end
 

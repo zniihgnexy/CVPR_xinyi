@@ -1,6 +1,6 @@
 %%section B - 1
 folderPath = './PR_CW_DATA_2021';
-colors = ['r', 'g', 'b', 'k', 'c', 'y'];
+colors = [[0 0.4470 0.7410], [0.8500 0.3250 0.0980], 'b', 'k', 'c',[0.6350 0.0780 0.1840]];
 labels = {'Acrylic', 'Black Foam', 'Car Sponge', 'Flour Sack', 'Kitchen Sponge', 'Steel Vase'};
 
 %Data Read
@@ -8,9 +8,13 @@ labels = {'Acrylic', 'Black Foam', 'Car Sponge', 'Flour Sack', 'Kitchen Sponge',
 load("./PR_CW_DATA_2021/F0_PVT.mat");
 load("./PR_CW_DATA_2021/F1_PVT.mat");
 
+standardizedData = (dataMatrix_F0 - mean(dataMatrix_F0)) ./ std(dataMatrix_F0);
+standardizedData_F1 = (dataMatrix_F1 - mean(dataMatrix_F1)) ./ std(dataMatrix_F1);
+meanData = mean(standardizedData);
+
 % a: covariance matrix, eigenvalues, and eigenvectors
-covMatrix_F0 = cov(dataMatrix_F0);
-covMatrix_F1 = cov(dataMatrix_F1);
+covMatrix_F0 = cov(standardizedData);
+covMatrix_F1 = cov(standardizedData_F1);
 % eigenvectors V, eigenvalues D
 [eigenvectors, eigenvalues] = eig(covMatrix_F0);
 [eigenvectors_F1, eigenvalues_F1] = eig(covMatrix_F1);
