@@ -6,7 +6,8 @@ data4_1=load('.\PR_CW_DATA_2021\flour_sack_410_01_HOLD.mat');
 data5_1=load('.\PR_CW_DATA_2021\kitchen_sponge_114_01_HOLD.mat');
 data6_1=load('.\PR_CW_DATA_2021\steel_vase_702_01_HOLD.mat');
 
-colors = {'r', 'g', 'b', 'k', 'c', 'y'};
+% colors = {'r', 'g', 'b', 'k', 'c', 'y'};
+colors = [[0 0.4470 0.7410], [0.8500 0.3250 0.0980], 'b', 'k', 'c',[0.6350 0.0780 0.1840]];
 displayNames = {'Acrylic', 'Black Foam', 'Car Sponge', 'Flour Sack', 'Kitchen Sponge', 'Steel Vase'}; % 定义显示名称列表
 dataSets = {'data1_1', 'data2_1', 'data3_1', 'data4_1', 'data5_1', 'data6_1'};
 
