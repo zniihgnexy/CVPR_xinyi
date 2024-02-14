@@ -37,13 +37,15 @@ label_4 = ones(10, 1)*4;
 label_5 = ones(10, 1)*5;
 label_6 = ones(10, 1)*6;
 
+colors = {'r', 'g', 'b', 'k', 'c', 'y'};
+
 label = [label_1;label_2;label_3;label_4;label_5;label_6];
 
-gscatter(data_clustering(:,1), data_clustering(:,2), label);
+% gscatter(data_clustering(:,1), data_clustering(:,2), label);
+% grid off;
+% 在绘制之前设置 ColorOrder
+gscatter(data_clustering(:,1), data_clustering(:,2), label, char(colors));
 grid off;
-
-
-
 
 max_iter = 1000;
 iter = 0;
