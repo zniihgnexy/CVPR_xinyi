@@ -6,6 +6,9 @@ data4_1=load('.\PR_CW_DATA_2021\flour_sack_410_01_HOLD.mat');
 data5_1=load('.\PR_CW_DATA_2021\kitchen_sponge_114_01_HOLD.mat');
 data6_1=load('.\PR_CW_DATA_2021\steel_vase_702_01_HOLD.mat');
 
+colors = {'r', 'g', 'b', 'k', 'c', 'y'};
+displayNames = {'Acrylic', 'Black Foam', 'Car Sponge', 'Flour Sack', 'Kitchen Sponge', 'Steel Vase'}; % 定义显示名称列表
+dataSets = {'data1_1', 'data2_1', 'data3_1', 'data4_1', 'data5_1', 'data6_1'};
 
 % question 1: load the original files and show the data from the same graph
 % in order to show the differences between different objects
@@ -13,103 +16,67 @@ data6_1=load('.\PR_CW_DATA_2021\steel_vase_702_01_HOLD.mat');
 % plot the F0Electrodes values of different objects. in each object, we
 % take the average of electrodes
 figure(1)
-% Plotting the averages
-rowAverage = mean(data1_1.F0Electrodes, 1);
-plot(rowAverage, 'DisplayName', 'Acrylic')
-hold on;
-rowAverage = mean(data2_1.F0Electrodes, 1);
-plot(rowAverage, 'DisplayName', 'Black Foam')
-hold on;
-rowAverage = mean(data3_1.F0Electrodes, 1);
-plot(rowAverage, 'DisplayName', 'Car Sponge')
-hold on;
-rowAverage = mean(data4_1.F0Electrodes, 1);
-plot(rowAverage, 'DisplayName', 'Flour Sack')
-hold on;
-rowAverage = mean(data5_1.F0Electrodes, 1);
-plot(rowAverage, 'DisplayName', 'Kitchen Sponge')
-hold on;
-rowAverage = mean(data6_1.F0Electrodes, 1);
-plot(rowAverage, 'DisplayName', 'Steel Vase')
-title('Average F0 Electrode Values for Different Objects')
-legend
+% Plotting the data
+field = 'F0Electrodes';
+for i = 1:length(dataSets)
+    dataSet = eval(dataSets{i});
+    rowAverage = mean(dataSet.(field), 1);
+    plot(rowAverage, 'DisplayName', displayNames{i}, 'Color', colors{i});
+    hold on;
+end
+title('Average F0pac Values for Different Objects');
+legend('show');
 
 
 % plot the F0pac values of different objects
 % in each object, we take the average of electrodes
 figure(2)
-% Plotting the averages
-rowAverage = mean(data1_1.F0pac, 1);
-plot(rowAverage, 'DisplayName', 'Acrylic')
-hold on;
-rowAverage = mean(data2_1.F0pac, 1);
-plot(rowAverage, 'DisplayName', 'Black Foam')
-hold on;
-rowAverage = mean(data3_1.F0pac, 1);
-plot(rowAverage, 'DisplayName', 'Car Sponge')
-hold on;
-rowAverage = mean(data4_1.F0pac, 1);
-plot(rowAverage, 'DisplayName', 'Flour Sack')
-hold on;
-rowAverage = mean(data5_1.F0pac, 1);
-plot(rowAverage, 'DisplayName', 'Kitchen Sponge')
-hold on;
-rowAverage = mean(data6_1.F0pac, 1);
-plot(rowAverage, 'DisplayName', 'Steel Vase')
-title('Average F0pac Values for Different Objects')
-legend
+% Plotting the data
+field = 'F0pac';
+for i = 1:length(dataSets)
+    dataSet = eval(dataSets{i});
+    rowAverage = mean(dataSet.(field), 1);
+    plot(rowAverage, 'DisplayName', displayNames{i}, 'Color', colors{i});
+    hold on;
+end
+title('Average F0pac Values for Different Objects');
+legend('show');
 
 % plot the F0pdc values of different objects
 figure(3)
 % Plotting the data
-plot(data1_1.F0pdc, 'DisplayName', 'Acrylic')
-hold on;
-plot(data2_1.F0pdc, 'DisplayName', 'Black Foam')
-hold on;
-plot(data3_1.F0pdc, 'DisplayName', 'Car Sponge')
-hold on;
-plot(data4_1.F0pdc, 'DisplayName', 'Flour Sack')
-hold on;
-plot(data5_1.F0pdc, 'DisplayName', 'Kitchen Sponge')
-hold on;
-plot(data6_1.F0pdc, 'DisplayName', 'Steel Vase')
-title('F0pdc Values for Different Objects')
-legend
+field = 'F0pdc';
+for i = 1:length(dataSets)
+    dataSet = eval(dataSets{i});
+    plot(dataSet.(field), 'DisplayName', displayNames{i}, 'Color', colors{i});
+    hold on;
+end
+title('F0pdc Values for Different Objects');
+legend('show');
 
 
 % plot the F0tac values of different objects
 figure(4)
 % Plotting the data
-plot(data1_1.F0tac, 'DisplayName', 'Acrylic')
-hold on;
-plot(data2_1.F0tac, 'DisplayName', 'Black Foam')
-hold on;
-plot(data3_1.F0tac, 'DisplayName', 'Car Sponge')
-hold on;
-plot(data4_1.F0tac, 'DisplayName', 'Flour Sack')
-hold on;
-plot(data5_1.F0tac, 'DisplayName', 'Kitchen Sponge')
-hold on;
-plot(data6_1.F0tac, 'DisplayName', 'Steel Vase')
-title('F0tac Values for Different Objects')
-legend
+field = 'F0tac';
+for i = 1:length(dataSets)
+    dataSet = eval(dataSets{i});
+    plot(dataSet.(field), 'DisplayName', displayNames{i}, 'Color', colors{i});
+    hold on;
+end
+title('F0tac Values for Different Objects');
+legend('show');
 
-% plot the F0tdc values of different objects
 figure(5)
 % Plotting the data
-plot(data1_1.F0tdc, 'DisplayName', 'Acrylic')
-hold on;
-plot(data2_1.F0tdc, 'DisplayName', 'Black Foam')
-hold on;
-plot(data3_1.F0tdc, 'DisplayName', 'Car Sponge')
-hold on;
-plot(data4_1.F0tdc, 'DisplayName', 'Flour Sack')
-hold on;
-plot(data5_1.F0tdc, 'DisplayName', 'Kitchen Sponge')
-hold on;
-plot(data6_1.F0tdc, 'DisplayName', 'Steel Vase')
-title('F0tdc Values for Different Objects')
-legend
+field = 'F0tdc';
+for i = 1:length(dataSets)
+    dataSet = eval(dataSets{i});
+    plot(dataSet.(field), 'DisplayName', displayNames{i}, 'Color', colors{i});
+    hold on;
+end
+title('F0tdc Values for Different Objects');
+legend('show');
 
 
 %% question2
