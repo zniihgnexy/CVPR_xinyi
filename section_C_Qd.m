@@ -130,19 +130,19 @@ plot3([point1(1,1),point2(1,1)], [point1(1,2),point2(1,2)],[point1(1,3),point2(1
 hold on;
 
 
-% 假设 W 已经定义
-% 计算与 W 正交的向量
-orthogonalVector = cross(W, [1; 0; 0]); % 使用单位向量 [1,0,0]
+% Assume that W is defined 
+% Calculate the vector orthogonal to W
+orthogonalVector = cross(W, [1; 0; 0]); 
 
-% 规范化向量以便更好地可视化
+% Normalise vectors for better visualisation
 orthogonalVector = orthogonalVector / norm(orthogonalVector);
 
-% 定义穿过 [0,0,0] 的线的两个点
-stepSize = 3; % 步长可以根据需要调整
+% Define the two points of the line through [0,0,0].
+stepSize = 3;% Step length can be adjusted as required
 orthPoint1 = -stepSize * orthogonalVector';
 orthPoint2 = stepSize * orthogonalVector';
 
-% 在现有图上绘制正交线
+% Plotting orthogonal lines on existing diagrams
 hold on;
 plot3([orthPoint1(1), orthPoint2(1)], [orthPoint1(2), orthPoint2(2)], [orthPoint1(3), orthPoint2(3)], 'r-'); 
 

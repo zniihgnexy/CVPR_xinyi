@@ -12,7 +12,7 @@ centers = -2.5 + 4.*rand(6, 3);
 % Disance metric options:
 % dist_metric = ["Euclidean","Manhattan","Minkowski","Chebyshev","Cosine Distance"];
 
-dist_metric = "Cosine Distance";
+dist_metric = "Chebyshev";
 Minkowski_P = 3; % only used in Minkowski distance calculation
 
 colors = [[0 0.4470 0.7410], [0.8500 0.3250 0.0980], 'b', 'k', 'c',[0.6350 0.0780 0.1840]];
@@ -33,19 +33,17 @@ label_6 = ones(10, 1)*6;
 
 label = [label_1;label_2;label_3;label_4;label_5;label_6];
 
-% 创建一个数组来保存scatter对象，这样我们可以在调用legend函数时使用它们
+% Create an array to hold the scatter objects so we can use them when calling the legend function
 scatterObjects = gobjects(length(labels), 1); 
 
 figure;
-% 绘制散点图，为每组数据分配颜色和图例
 for i = 1:length(labels)
     idxStart = (i-1)*10 + 1;
-    idxEnd = i*10; % 假设 n 已正确定义，这里直接使用 i*10
+    idxEnd = i*10;
     scatterObjects(i) = scatter3(data_clustering(idxStart:idxEnd,1), data_clustering(idxStart:idxEnd,2), data_clustering(idxStart:idxEnd,3),36,colors(i) ,'filled', 'DisplayName', labels{i});
-    hold on; % 保持当前图像，以便在上面添加更多的散点图
+    hold on; 
 end
 
-% 添加图例
 legend(scatterObjects, 'Location', 'best');
 title("The Original Data Distribution in F1 PVT");
 xlabel('Feature 1');
@@ -118,7 +116,7 @@ while condition
 
 %     new_labels = zeros(60,1);
     
-    % 对于每个不同的元素，找到它们的索引
+    % For each distinct element, find their indexes
     for i = 1:length(unique_elements)
         element = unique_elements(i);
         index_list = find(label_cluster == element);
@@ -129,7 +127,7 @@ while condition
     iter = iter + 1;
 end
 
-% 创建一个数组来保存scatter对象，这样我们可以在调用legend函数时使用它们
+% Create an array to hold the scatter objects so we can use them when calling the legend function
 scatterObjects_2 = gobjects(length(unique_elements), 1); 
 labels = ["cluster 1", "cluster 2", "cluster 3", "cluster 4", "cluster 5", "cluster 6"];
 labels_2 = ["center 1", "center 2", "center 3", "center 4", "center 5", "center 6"];
@@ -137,12 +135,12 @@ colors = [[0 0.4470 0.7410], [0.8500 0.3250 0.0980], 'b', 'k', 'c',[0.6350 0.078
 
 
 figure;
-% 绘制散点图，为每组数据分配颜色和图例
+% Plotting scatter plots, assigning colours and legends to each set of data
 for i = 1:length(unique_elements)
     element = unique_elements(i);
     index_list = find(label_cluster == element);
     scatterObjects_2(i) = scatter3(data_clustering(index_list,1), data_clustering(index_list,2), data_clustering(index_list,3),36,colors(i), 'filled','DisplayName', labels{i});
-    hold on; % 保持当前图像，以便在上面添加更多的散点图
+    hold on; % Keep the current image to add more scatterplots on top of it
 end
 
 legend(scatterObjects_2, 'Location', 'best');
@@ -151,7 +149,6 @@ for i = 1:size(centers,1)
     scatter3(centers(i,1), centers(i,2), centers(i,3), 70, 'kp', 'MarkerFaceColor', 'black','DisplayName', labels_2{i});
 end
 
-% 添加图例
 title("F1 Cluster Processed by K-means in",dist_metric);
 xlabel('Vibration');
 ylabel('Pressure');

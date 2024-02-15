@@ -7,7 +7,7 @@ data5_1=load('.\PR_CW_DATA_2021\kitchen_sponge_114_01_HOLD.mat');
 data6_1=load('.\PR_CW_DATA_2021\steel_vase_702_01_HOLD.mat');
 
 % colors = {'r', 'g', 'b', 'k', 'c', 'y'};
-colors = [[0 0.4470 0.7410], [0.8500 0.3250 0.0980], 'b', 'k', 'c',[0.6350 0.0780 0.1840]];
+colors = {[0 0.4470 0.7410], [0.8500 0.3250 0.0980], [0.9290 0.6940 0.1250], [0.4940 0.1840 0.5560], [0.4660 0.6740 0.1880],[0.6350 0.0780 0.1840]};
 displayNames = {'Acrylic', 'Black Foam', 'Car Sponge', 'Flour Sack', 'Kitchen Sponge', 'Steel Vase'}; % 定义显示名称列表
 dataSets = {'data1_1', 'data2_1', 'data3_1', 'data4_1', 'data5_1', 'data6_1'};
 
@@ -17,6 +17,7 @@ dataSets = {'data1_1', 'data2_1', 'data3_1', 'data4_1', 'data5_1', 'data6_1'};
 % plot the F0Electrodes values of different objects. in each object, we
 % take the average of electrodes
 figure(1)
+set(gcf, 'Position', [300, 200, 300, 150]);
 % Plotting the data
 field = 'F0Electrodes';
 for i = 1:length(dataSets)
@@ -25,13 +26,15 @@ for i = 1:length(dataSets)
     plot(rowAverage, 'DisplayName', displayNames{i}, 'Color', colors{i});
     hold on;
 end
-title('Average F0pac Values for Different Objects');
-legend('show');
+title('Average F0Electrodes Values for Different Objects');
+% legend('show');
+hold off;
 
 
 % plot the F0pac values of different objects
 % in each object, we take the average of electrodes
 figure(2)
+set(gcf, 'Position', [300, 200, 300, 150]);
 % Plotting the data
 field = 'F0pac';
 for i = 1:length(dataSets)
@@ -41,10 +44,11 @@ for i = 1:length(dataSets)
     hold on;
 end
 title('Average F0pac Values for Different Objects');
-legend('show');
+% legend('show');
 
 % plot the F0pdc values of different objects
 figure(3)
+set(gcf, 'Position', [300, 200, 300, 150]);
 % Plotting the data
 field = 'F0pdc';
 for i = 1:length(dataSets)
@@ -53,11 +57,12 @@ for i = 1:length(dataSets)
     hold on;
 end
 title('F0pdc Values for Different Objects');
-legend('show');
+% legend('show');
 
 
 % plot the F0tac values of different objects
 figure(4)
+set(gcf, 'Position', [300, 200, 300, 150]);
 % Plotting the data
 field = 'F0tac';
 for i = 1:length(dataSets)
@@ -66,9 +71,10 @@ for i = 1:length(dataSets)
     hold on;
 end
 title('F0tac Values for Different Objects');
-legend('show');
+% legend('show');
 
 figure(5)
+set(gcf, 'Position', [300, 200, 300, 150]);
 % Plotting the data
 field = 'F0tdc';
 for i = 1:length(dataSets)
@@ -77,7 +83,7 @@ for i = 1:length(dataSets)
     hold on;
 end
 title('F0tdc Values for Different Objects');
-legend('show');
+% legend('show');
 
 
 %% question2
@@ -96,28 +102,30 @@ name_F1 = {'F1pac',  'F1pdc',  'F1tac'};
 name_Electro_F0 = {'F0Electrodes'}; % Electrodes
 name_Electro_F1 = {'F1Electrodes'}; % Electrodes
 
-% 初始化数据矩阵
+% Initialise the data matrix
 dataMatrix_F0 = [];
 dataMatrix_F1 = [];
 dataMatrix_elec_F0 = [];
 dataMatrix_elec_F1 = [];
 
 for i_name = 1:length(name_F0)
-    tempData = []; % 临时存储当前变量的所有文件数据
+    tempData = []; % Temporarily stores all file data for the current variable
 
     for i = 1:length(files)
         data = load(fullfile(folderPath, files(i).name));
+        fprintf(files(i).name);
+        fprintf("  ");
 
         if isfield(data, name_F0{i_name})
-            if strcmp(name_F0{i_name}, 'F0pac') % 检查是否是特殊处理的变量
-                % 特殊处理 F0pac
+            if strcmp(name_F0{i_name}, 'F0pac') 
+                % Special handling F0pac 
                 if size(data.(name_F0{i_name}), 1) >= 2 && size(data.(name_F0{i_name}), 2) >= time
                     tempData(end + 1) = data.(name_F0{i_name})(2, time);
                 else
                     tempData(end + 1) = NaN;
                 end
             else
-                % 正常处理其他变量
+                % Normal processing of other variables
                 if length(data.(name_F0{i_name})) >= time
                     tempData(end + 1) = data.(name_F0{i_name})(time);
                 else
@@ -127,26 +135,24 @@ for i_name = 1:length(name_F0)
         end
     end
 
-    % 将当前变量的数据添加到数据矩阵中
+    % Add the data of the current variable to the data matrix
     dataMatrix_F0 = [dataMatrix_F0; tempData];
 end
 
 for i_name = 1:length(name_F1)
-    tempData = []; % 临时存储当前变量的所有文件数据
+    tempData = []; 
 
     for i = 1:length(files)
         data = load(fullfile(folderPath, files(i).name));
 
         if isfield(data, name_F1{i_name})
-            if strcmp(name_F1{i_name}, 'F1pac') % 检查是否是特殊处理的变量
-                % 特殊处理 F0pac
+            if strcmp(name_F1{i_name}, 'F1pac') 
                 if size(data.(name_F1{i_name}), 1) >= 2 && size(data.(name_F1{i_name}), 2) >= time
                     tempData(end + 1) = data.(name_F1{i_name})(2, time);
                 else
                     tempData(end + 1) = NaN;
                 end
             else
-                % 正常处理其他变量
                 if length(data.(name_F1{i_name})) >= time
                     tempData(end + 1) = data.(name_F1{i_name})(time);
                 else
@@ -156,47 +162,43 @@ for i_name = 1:length(name_F1)
         end
     end
 
-    % 将当前变量的数据添加到数据矩阵中
     dataMatrix_F1 = [dataMatrix_F1; tempData];
 end
 
 for i_name = 1:length(name_Electro_F0)
-    tempData = []; % 临时存储当前变量的所有文件数据
+    tempData = []; 
 
     for i = 1:length(files)
         data = load(fullfile(folderPath, files(i).name));
 
         if isfield(data, name_Electro_F0{i_name})
-            selectedData = data.(name_Electro_F0{i_name})(:, time); % 提取每一行在指定时间的数据
-            tempData = [tempData; selectedData']; % 转换为行向量并添加到临时数据中
+            selectedData = data.(name_Electro_F0{i_name})(:, time); % Extracts data for each row at the specified time
+            tempData = [tempData; selectedData']; % Converted to row vectors and added to temporary data
         end
     end
 
-    % 将当前变量的数据添加到数据矩阵中
-    dataMatrix_elec_F0 = [dataMatrix_elec_F0; tempData]; % 此处可能需要调整
+    dataMatrix_elec_F0 = [dataMatrix_elec_F0; tempData]; 
 end
 
 for i_name = 1:length(name_Electro_F1)
-    tempData = []; % 临时存储当前变量的所有文件数据
+    tempData = []; 
 
     for i = 1:length(files)
         data = load(fullfile(folderPath, files(i).name));
 
         if isfield(data, name_Electro_F1{i_name})
-            selectedData = data.(name_Electro_F1{i_name})(:, time); % 提取每一行在指定时间的数据
-            tempData = [tempData; selectedData']; % 转换为行向量并添加到临时数据中
+            selectedData = data.(name_Electro_F1{i_name})(:, time); 
+            tempData = [tempData; selectedData']; 
         end
     end
 
-    % 将当前变量的数据添加到数据矩阵中
-    dataMatrix_elec_F1 = [dataMatrix_elec_F1; tempData]; % 此处可能需要调整
+    dataMatrix_elec_F1 = [dataMatrix_elec_F1; tempData]; 
 end
 
-% 转置数据矩阵以匹配所需的60x4格式
 dataMatrix_F0 = dataMatrix_F0';
 dataMatrix_F1 = dataMatrix_F1';
 
-% 保存数据
+% save data
 saveFilename = fullfile(folderPath, 'F0_PVT.mat');
 save(saveFilename, 'dataMatrix_F0');
 
@@ -230,17 +232,17 @@ x = dataMatrix_F0(:, 1);
 y = dataMatrix_F0(:, 2);
 z = dataMatrix_F0(:, 3);
 
-scatter3(x(1:10), y(1:10), z(1:10), 30, 'r', 'filled', 'DisplayName', 'Acrylic');
+scatter3(x(1:10), y(1:10), z(1:10), 30, colors{1}, 'filled', 'DisplayName', 'Acrylic');
 hold on;
-scatter3(x(11:20), y(11:20), z(11:20), 30, 'g', 'filled', 'DisplayName', 'Black Foam');
+scatter3(x(11:20), y(11:20), z(11:20), 30, colors{2}, 'filled', 'DisplayName', 'Black Foam');
 hold on;
-scatter3(x(21:30), y(21:30), z(21:30), 30, 'b', 'filled', 'DisplayName', 'Car Sponge');
+scatter3(x(21:30), y(21:30), z(21:30), 30, colors{3}, 'filled', 'DisplayName', 'Car Sponge');
 hold on;
-scatter3(x(31:40), y(31:40), z(31:40), 30, 'k', 'filled', 'DisplayName', 'Flour Sack');
+scatter3(x(31:40), y(31:40), z(31:40), 30, colors{4}, 'filled', 'DisplayName', 'Flour Sack');
 hold on;
-scatter3(x(41:50), y(41:50), z(41:50), 30, 'c', 'filled', 'DisplayName', 'Kitchen Sponge');
+scatter3(x(41:50), y(41:50), z(41:50), 30, colors{5}, 'filled', 'DisplayName', 'Kitchen Sponge');
 hold on;
-scatter3(x(51:end), y(51:end), z(51:end), 30, 'y', 'filled', 'DisplayName', 'Steel Vase');
+scatter3(x(51:end), y(51:end), z(51:end), 30, colors{6}, 'filled', 'DisplayName', 'Steel Vase');
 
 xlabel('Vibration');
 ylabel('Pressure');
@@ -248,6 +250,7 @@ zlabel('Temperature');
 title('3D Scatter Plot for F0 Parameters');
 legend('Location', 'best');
 grid on;
+hold off;
 
 % saveas(gcf, '3D_Scatter_Plot.png');
 
@@ -257,17 +260,17 @@ x2 = dataMatrix_F1(:, 1);
 y2 = dataMatrix_F1(:, 2);
 z2 = dataMatrix_F1(:, 3);
 
-scatter3(x2(1:10), y2(1:10), z2(1:10), 30, 'r', 'filled', 'DisplayName', 'Acrylic');
+scatter3(x2(1:10), y2(1:10), z2(1:10), 30, colors{1}, 'filled', 'DisplayName', 'Acrylic');
 hold on;
-scatter3(x2(11:20), y2(11:20), z2(11:20), 30, 'g', 'filled', 'DisplayName', 'Black Foam');
+scatter3(x2(11:20), y2(11:20), z2(11:20), 30, colors{2}, 'filled', 'DisplayName', 'Black Foam');
 hold on;
-scatter3(x2(21:30), y2(21:30), z2(21:30), 30, 'b', 'filled', 'DisplayName', 'Car Sponge');
+scatter3(x2(21:30), y2(21:30), z2(21:30), 30, colors{3}, 'filled', 'DisplayName', 'Car Sponge');
 hold on;
-scatter3(x2(31:40), y2(31:40), z2(31:40), 30, 'k', 'filled', 'DisplayName', 'Flour Sack');
+scatter3(x2(31:40), y2(31:40), z2(31:40), 30, colors{4}, 'filled', 'DisplayName', 'Flour Sack');
 hold on;
-scatter3(x2(41:50), y2(41:50), z2(41:50), 30, 'c', 'filled', 'DisplayName', 'Kitchen Sponge');
+scatter3(x2(41:50), y2(41:50), z2(41:50), 30, colors{5}, 'filled', 'DisplayName', 'Kitchen Sponge');
 hold on;
-scatter3(x2(51:end), y2(51:end), z2(51:end), 30, 'y', 'filled', 'DisplayName', 'Steel Vase');
+scatter3(x2(51:end), y2(51:end), z2(51:end), 30, colors{6}, 'filled', 'DisplayName', 'Steel Vase');
 
 xlabel('Vibration');
 ylabel('Pressure');
@@ -275,3 +278,4 @@ zlabel('Temperature');
 title('3D Scatter Plot for F1 Parameters');
 legend('Location', 'best');
 grid on;
+hold off;

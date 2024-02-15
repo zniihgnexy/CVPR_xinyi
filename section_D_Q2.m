@@ -40,11 +40,12 @@ end
 
 accuracy = [];
 
-numTrials = 20; % 设置循环次数
-accuracyMat = zeros(length(leaf), numTrials); % 初始化存储accuracy的矩阵
+numTrials = 20; % The number of epoches, to calculate the averaged accuracy after that epoches
+accuracyMat = zeros(length(leaf), numTrials); % Initialise the matrix for storing accuracies
 
 
 %%
+leaf = 35;
 for i = 1:length(leaf)
     baggedModel = TreeBagger(leaf(i), train_data, train_labels, 'OOBPredictorImportance', 'On');
 
@@ -52,16 +53,14 @@ for i = 1:length(leaf)
     [Y_pred, ~] = predict(baggedModel, test_data);
     confMat = confusionmat(test_labels, str2double(Y_pred));
 
-    figure; 
+    figure(i); 
     confusionchart(confMat);
     xlabel('Predicted Class');
     ylabel('True Class');
     title('Confusion Matrix');
 
-    % Calculate accuracy for this trial and leaf
-    currentAccuracy = sum(diag(confMat)) / sum(confMat(:));
-    accuracyMat(i, trial) = currentAccuracy; % Store accuracy
 end
+
 %%
 
 for trial = 1:numTrials

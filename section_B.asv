@@ -224,27 +224,27 @@ projection2D_electro = standardizedData_F1 * eigenvectors_F1(:,1:2);
 
 figure;
 
-n = size(projection3D_F1, 1); 
+n = size(projection3D_F1, 1); % 数据点的总数
 
-% Array of tags 
-% Create an array to hold the scatter objects so we can use them when calling the legend function
+% 标签数组
+% 创建一个数组来保存scatter对象，这样我们可以在调用legend函数时使用它们
 scatterObjects = gobjects(length(labels), 1); 
 
-% Plotting scatter plots, assigning colours and legends to each set of data
+% 绘制散点图，为每组数据分配颜色和图例
 for i = 1:length(labels)
     idxStart = (i-1)*10 + 1;
     idxEnd = min(i*10, n);
     scatterObjects(i) = scatter3(projection3D_F1(idxStart:idxEnd,1), projection3D_F1(idxStart:idxEnd,2), projection3D_F1(idxStart:idxEnd,3), ...
         36,colors{i}, 'filled', 'DisplayName', labels{i});
-    hold on; % Keep the current image to add more scatterplots on top of it
+    hold on; % 保持当前图像，以便在上面添加更多的散点图
 end
 
 title('Standardized Data of Electrode');
 xlabel('X Axis');
 ylabel('Y Axis');
 zlabel('Z Axis');
-legend(scatterObjects, 'Location', 'best'); 
-hold off; 
+legend(scatterObjects, 'Location', 'best'); % 使用scatter对象数组来创建图例
+hold off; % 释放图像
 
 saveFilename = fullfile(folderPath, 'Electro_projection3D_F1.mat');
 save(saveFilename, 'projection3D_F1');
